@@ -1,0 +1,7 @@
+<animated-rotate
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/pulltorefresh_progress"
+    android:pivotX="50%"
+    android:pivotY="50%"
+    android:duration="100"
+    />

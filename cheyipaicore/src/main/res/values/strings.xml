@@ -1,0 +1,16 @@
+<resources>
+
+
+    <string name="loading_status_desc">数据加载中...</string>
+
+    <string name="pull_to_refresh_pull_down_label">下拉刷新</string>
+    <string name="pull_to_refresh_pull_up_label">上拉刷新</string>
+    <string name="pull_to_refresh_release_label">释放刷新</string>
+    <string name="pull_to_refresh_refreshing_label">加载中......</string>
+    <string name="pull_to_refresh_tap_label">返回顶部</string>
+
+    <string name="pull_to_refresh_from_bottom_pull_label">@string/pull_to_refresh_pull_up_label</string>
+    <string name="pull_to_refresh_from_bottom_release_label">@string/pull_to_refresh_release_label</string>
+    <string name="pull_to_refresh_from_bottom_refreshing_label">@string/pull_to_refresh_refreshing_label</string>
+    <string name="pull_to_refresh_pull_label">@string/pull_to_refresh_pull_down_label</string>
+</resources>

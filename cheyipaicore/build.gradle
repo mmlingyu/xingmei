@@ -1,0 +1,53 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "21.1.2"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 19
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+uploadArchives {
+    repositories.mavenDeployer {
+        snapshotRepository(url: 'http://192.168.106.17:7777/nexus/content/repositories/Cheyipai-Snapshot/') {
+            authentication(userName: 'cheyipai', password: 'cheyipai')
+        }
+
+        repository(url: 'http://192.168.106.17:7777/nexus/content/repositories/Cheyipai-Release/') {
+            authentication(userName: 'cheyipai', password: 'cheyipai')
+        }
+
+        pom.project {
+            version '1.0.8'
+            artifactId 'cheyipaicore'
+            groupId 'com.cheyipai.mobile.library'
+            packaging 'aar'
+            description 'dependences lib'
+        }
+    }
+}
+
+artifacts {
+    archives file('cheyipaicore.aar')
+}
+
+dependencies {
+    //compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:19.1.0'
+
+     compile files('libs/butterknife-6.1.0.jar')
+    // compile files('libs/EventBus2.4.jar')
+    provided fileTree(include: ['EventBus2.4.jar','android-support-v7-recyclerview.jar','google-gson-1.7.1.jar','umeng-analytics-v5.2.4.jar'], dir: 'libs')
+   // compile files('libs/umeng_social_sdk.jar')
+}

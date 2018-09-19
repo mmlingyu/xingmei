@@ -1,0 +1,7 @@
+<resources>
+    <!--上下拉刷新 YQH 20140903-->
+    <item type="id" name="gridview" />
+    <item type="id" name="webview" />
+    <item type="id" name="scrollview" />
+    <item type="id" name="viewpager" />
+</resources>

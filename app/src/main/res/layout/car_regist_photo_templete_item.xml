@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dimen_6"
+    android:paddingLeft="@dimen/dimen_6"
+    android:paddingRight="@dimen/dimen_6"
+    android:paddingTop="@dimen/dimen_6">
+
+    <ImageView
+        android:id="@+id/car_photo_iv"
+        android:layout_width="wrap_content"
+        android:src="@drawable/cyp_default"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/car_photo_dec_tv"
+        android:layout_width="match_parent"
+        android:layout_below="@id/car_photo_iv"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/dimen_2"
+        style="@style/CheYiPai.TextAppearance.Middle.BLACK"
+        android:text="@string/app_name"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
+

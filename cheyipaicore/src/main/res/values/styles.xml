@@ -1,0 +1,1105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="OrderCancelDialog" parent="android:Animation">
+        <item name="@android:windowEnterAnimation">@anim/dialog_enter</item>
+        <item name="@android:windowExitAnimation">@anim/dialog_exit</item>
+    </style>
+
+    <style name="Dialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
+    <style name="XEDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground"> @android:color/transparent </item>      
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
+    <style name="LoadingDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <!--是否模糊-->
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="AnimationPreview">
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
+
+    <style name="Theme.Styled" parent="@style/Theme.AppCompat">
+        <item name="actionBarStyle">@style/QueryActionBar</item>
+        <item name="android:actionBarStyle">@style/QueryActionBar</item>
+    </style>
+
+    <style name="QueryActionBar" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="background">@android:color/white</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="backgroundSplit">@android:color/white</item>
+    </style>
+    <!--<style name="AppThemes" parent="AppBaseTheme">-->
+        <!--<item name="hlv_listViewStyle">@style/HListView</item>-->
+        <!--<item name="hlv_absHListViewStyle">@style/AbsHListView</item>-->
+        <!--<item name="android:screenOrientation">portrait</item>-->
+        <!--<item name="android:windowSoftInputMode">stateHidden</item>-->
+        <!--<item name="android:windowAnimationStyle">@style/translationstyle</item>-->
+        <!--&lt;!&ndash;去掉actionBar下的阴影&ndash;&gt;-->
+        <!--<item name="android:windowContentOverlay">@null</item>-->
+    <!--</style>-->
+
+    <!--添加activity进出风格：右进左出  按Back 右出左进  YQH 20141230-->
+    <style name="translationstyle">
+        <item name="@android:activityOpenEnterAnimation">@anim/default_fromright_in</item>
+        <item name="@android:activityOpenExitAnimation">@anim/default_toleft_out</item>
+        <item name="@android:activityCloseEnterAnimation">@anim/default_fromleft_in</item>
+        <item name="@android:activityCloseExitAnimation">@anim/default_toright_out</item>
+    </style>
+
+    <style name="HListView" parent="AbsHListView">
+        <item name="android:listSelector">@android:color/transparent</item>
+        <item name="android:cacheColorHint">@android:color/transparent</item>
+        <item name="android:divider">@android:color/transparent</item>
+        <item name="android:scrollingCache">false</item>
+        <item name="android:overScrollMode">always</item>
+        <item name="android:fadingEdge">none</item>
+        <item name="android:scrollbars">none</item>
+        <item name="android:fastScrollEnabled">false</item>
+        <item name="android:smoothScrollbar">false</item>
+        <item name="android:choiceMode">multipleChoiceModal</item>
+        <item name="hlv_stackFromRight">false</item>
+        <item name="hlv_measureWithChild">0</item>
+        <item name="hlv_dividerWidth">10dip</item>
+        <item name="hlv_headerDividersEnabled">true</item>
+        <item name="hlv_footerDividersEnabled">true</item>
+        <item name="hlv_transcriptMode">disabled</item>
+    </style>
+
+    <style name="AbsHListView">
+        <item name="android:scrollbars">horizontal</item>
+        <item name="android:fadingEdge">horizontal</item>
+    </style>
+
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <style name="Transparent">
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="Translucent_NoTitle" parent="android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <!-- 边框 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">false</item>
+        <!-- 半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 背景透明 -->
+        <item name="android:backgroundDimEnabled">false</item>
+        <!-- 模糊 -->
+        <item name="android:backgroundDimAmount">0.6</item>
+    </style>
+
+    <style name="main_tab_bottom">
+        <item name="android:textSize">@dimen/bottom_tab_font_size</item>
+        <item name="android:textColor">@drawable/index_tabhost_selector_mainpage_text</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:background">@null</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:button">@null</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:layout_weight">1.0</item>
+    </style>
+
+    <style name="MyDialogStyle" parent="android:Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <!-- 边框 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 背景透明 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 模糊 -->
+    </style>
+
+    <style name="dialog_loading" parent="android:Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 背景是否变灰 -->
+        <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
+        <!-- 背景动画-->
+        <item name="android:windowFrame">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:indeterminateOnly">true</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
+    <!-- 友盟分享-->
+    <style name="Theme.UMDefault" parent="android:style/Theme.NoTitleBar"/>
+
+    <!-- 友盟分享PopupWindow窗口动画 -->
+    <style name="AnimationPopupWindow">
+        <item name="android:windowEnterAnimation">@anim/view_show_translate_scale_from_bottom</item>
+        <item name="android:windowExitAnimation">@anim/view_hide_translate_scale_to_bottom</item>
+    </style>
+
+    <color name="Transparency">#00000000</color>
+
+    <!-- 加油站风格根 20140221 -->
+    <style name="CheYiPai" />
+
+    <!-- 文字默认显示 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance">
+        <item name="android:textColor">@color/text_default</item>
+    </style>
+
+    <!-- 文字风格统一，请在此基础上扩展新添加字体风格 YQH 20140221-->
+    <!--文字风格:最大字号 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.ExBiggest">
+        <item name="android:textSize">@dimen/text_size_ex_biggest</item>
+    </style>
+    <!--文字风格:最大字号 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Biggest">
+        <item name="android:textSize">@dimen/text_size_biggest</item>
+    </style>
+    <!--文字风格:更大字号 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Bigger">
+        <item name="android:textSize">@dimen/text_size_bigger</item>
+    </style>
+    <!--文字风格:大字号 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Big">
+        <item name="android:textSize">@dimen/text_size_big</item>
+    </style>
+    <!--文字风格:中字号 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Middle">
+        <item name="android:textSize">@dimen/text_size_middle</item>
+    </style>
+    <!--文字风格:中字号 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Middler">
+        <item name="android:textSize">@dimen/text_size_middle_middle</item>
+    </style>
+    <!--文字风格:中字号 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.MiddleSmall">
+        <item name="android:textSize">@dimen/text_size_middle_small</item>
+    </style>
+    <!--文字风格:中上字号 DH 20150708-->
+    <style name="CheYiPai.TextAppearance.Middleer">
+        <item name="android:textSize">@dimen/text_size_middle</item>
+    </style>
+    <!--文字风格:小字号 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Small">
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+    <style name="CheYiPai.TextAppearance.SmallerBig">
+        <item name="android:textSize">@dimen/text_size_smaller_big</item>
+    </style>
+    <!--文字风格:更小字号 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Smaller">
+        <item name="android:textSize">@dimen/text_size_smaller</item>
+    </style>
+    <!--加粗-->
+    <style name="CheYiPai.TextAppearance.Smaller.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!--文字风格:最小字号 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Smallest">
+        <item name="android:textSize">@dimen/text_size_smallest</item>
+    </style>
+    <!--文字风格:微小字号 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Tiny">
+        <item name="android:textSize">@dimen/text_size_tiny</item>
+    </style>
+
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- 新版文字风格 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style"/>
+    <!--文字风格:68px donghui 20151208-->
+    <style name="CheYiPai.TextAppearance.Style.SoBig">
+        <item name="android:textSize">@dimen/text_style_size_so_big</item>
+    </style>
+    <!--文字风格:44px zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Greater">
+        <item name="android:textSize">@dimen/text_style_size_greater</item>
+    </style>
+    <!--文字风格:40px zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Largest">
+        <item name="android:textSize">@dimen/text_style_size_largest</item>
+    </style>
+    <!--文字风格:38px zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Larger">
+        <item name="android:textSize">@dimen/text_style_size_larger</item>
+    </style>
+    <!--文字风格:36px zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Large">
+        <item name="android:textSize">@dimen/text_style_size_large</item>
+    </style>
+    <!--文字风格:34px zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Biggest">
+        <item name="android:textSize">@dimen/text_style_size_biggest</item>
+    </style>
+    <!--文字风格:32px zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Bigger">
+        <item name="android:textSize">@dimen/text_style_size_bigger</item>
+    </style>
+    <!--文字风格:30px zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Big">
+        <item name="android:textSize">@dimen/text_style_size_big</item>
+    </style>
+    <!--文字风格:28px zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Middle">
+        <item name="android:textSize">@dimen/text_style_size_middle</item>
+    </style>
+    <!--文字风格:26px zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Small">
+        <item name="android:textSize">@dimen/text_style_size_small</item>
+    </style>
+    <!--文字风格:24px zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Smaller">
+        <item name="android:textSize">@dimen/text_style_size_smaller</item>
+    </style>
+    <!--文字风格:22px zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Smallest">
+        <item name="android:textSize">@dimen/text_style_size_smallest</item>
+    </style>
+
+    <!--文字风格:68px, #ff8a21 donghui 20151208-->
+    <style name="CheYiPai.TextAppearance.Style.SoBig.Orange">
+        <item name="android:textColor">@color/color_text_ff8a21</item>
+    </style>
+
+
+
+    <style name="CheYiPai.TextAppearance.SmallerBig.333333">
+        <item name="android:textColor">@color/color_text_333333</item>
+    </style>
+
+    <!--文字风格:44px, #000000 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Greater.Black">
+        <item name="android:textColor">@color/color_text_000000</item>
+    </style>
+    <!--文字风格:44px, #333333 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Greater.BlackGray">
+        <item name="android:textColor">@color/color_text_333333</item>
+    </style>
+    <!--文字风格:44px, #333333, 加粗 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Greater.BlackGray.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <!--文字风格:44px, #666666 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Greater.DimGray">
+        <item name="android:textColor">@color/color_text_666666</item>
+    </style>
+    <!--文字风格:44px, #999999 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Greater.Gray">
+        <item name="android:textColor">@color/color_text_999999</item>
+    </style>
+    <!--文字风格:44px, #ffffff zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Greater.White">
+        <item name="android:textColor">@color/color_text_ffffff</item>
+    </style>
+    <!--文字风格:44px, #72abf1 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Greater.SkyBlue">
+        <item name="android:textColor">@color/color_text_72abf1</item>
+    </style>
+    <!--文字风格:44px, #fc8825 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Greater.CypOrange">
+        <item name="android:textColor">@color/color_text_fc8825</item>
+    </style>
+    <!--文字风格:44px, #808080 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Greater.SlateGray">
+        <item name="android:textColor">@color/color_text_808080</item>
+    </style>
+    <!--文字风格:44px, #24899c zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Greater.SeaGreen">
+        <item name="android:textColor">@color/color_text_24899c</item>
+    </style>
+    <!--文字风格:44px, #ff4848 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Greater.Tomato">
+        <item name="android:textColor">@color/color_text_ff4848</item>
+    </style>
+    <!--文字风格:44px, #c7c7c7 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Greater.LightGrey">
+        <item name="android:textColor">@color/color_text_c7c7c7</item>
+    </style>
+
+    <!--文字风格:40px, #000000 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Largest.Black">
+        <item name="android:textColor">@color/color_text_000000</item>
+    </style>
+    <!--文字风格:40px, #333333 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Largest.BlackGray">
+        <item name="android:textColor">@color/color_text_333333</item>
+    </style>
+    <!--文字风格:40px, #333333, 加粗 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Largest.BlackGray.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <!--文字风格:40px, #666666 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Largest.DimGray">
+        <item name="android:textColor">@color/color_text_666666</item>
+    </style>
+    <!--文字风格:40px, #999999 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Largest.Gray">
+        <item name="android:textColor">@color/color_text_999999</item>
+    </style>
+    <!--文字风格:40px, #ffffff zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Largest.White">
+        <item name="android:textColor">@color/color_text_ffffff</item>
+    </style>
+    <!--文字风格:40px, #72abf1 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Largest.SkyBlue">
+        <item name="android:textColor">@color/color_text_72abf1</item>
+    </style>
+    <!--文字风格:40px, #fc8825 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Largest.CypOrange">
+        <item name="android:textColor">@color/color_text_fc8825</item>
+    </style>
+    <!--文字风格:40px, #808080 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Largest.SlateGray">
+        <item name="android:textColor">@color/color_text_808080</item>
+    </style>
+    <!--文字风格:40px, #24899c zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Largest.SeaGreen">
+        <item name="android:textColor">@color/color_text_24899c</item>
+    </style>
+    <!--文字风格:40px, #ff4848 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Largest.Tomato">
+        <item name="android:textColor">@color/color_text_ff4848</item>
+    </style>
+    <!--文字风格:40px, #c7c7c7 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Largest.LightGrey">
+        <item name="android:textColor">@color/color_text_c7c7c7</item>
+    </style>
+    <!--文字风格:38px, #ff8a21 donghui 20151208-->
+    <style name="CheYiPai.TextAppearance.Style.Larger.Orange">
+        <item name="android:textColor">@color/color_text_ff8a21</item>
+    </style>
+    <!--文字风格:38px, #ffffff donghui 20151208-->
+    <style name="CheYiPai.TextAppearance.Style.Larger.White">
+        <item name="android:textColor">@color/color_text_ffffff</item>
+    </style>
+    <!--文字风格:34px, #000000 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Biggest.Black">
+        <item name="android:textColor">@color/color_text_000000</item>
+    </style>
+    <!--文字风格:34px, #333333 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Biggest.BlackGray">
+        <item name="android:textColor">@color/color_text_333333</item>
+    </style>
+    <!--文字风格:34px, #333333, 加粗 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Biggest.BlackGray.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <!--文字风格:34px, #666666 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Biggest.DimGray">
+        <item name="android:textColor">@color/color_text_666666</item>
+    </style>
+    <!--文字风格:34px, #999999 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Biggest.Gray">
+        <item name="android:textColor">@color/color_text_999999</item>
+    </style>
+    <!--文字风格:34px, #ffffff zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Biggest.White">
+        <item name="android:textColor">@color/color_text_ffffff</item>
+    </style>
+    <!--文字风格:34px, #72abf1 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Biggest.SkyBlue">
+        <item name="android:textColor">@color/color_text_72abf1</item>
+    </style>
+    <!--文字风格:34px, #fc8825 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Biggest.CypOrange">
+        <item name="android:textColor">@color/color_text_fc8825</item>
+    </style>
+    <!--文字风格:34px, #808080 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Biggest.SlateGray">
+        <item name="android:textColor">@color/color_text_808080</item>
+    </style>
+    <!--文字风格:34px, #24899c zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Biggest.SeaGreen">
+        <item name="android:textColor">@color/color_text_24899c</item>
+    </style>
+    <!--文字风格:34px, #ff4848 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Biggest.Tomato">
+        <item name="android:textColor">@color/color_text_ff4848</item>
+    </style>
+    <!--文字风格:34px, #c7c7c7 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Biggest.LightGrey">
+        <item name="android:textColor">@color/color_text_c7c7c7</item>
+    </style>
+    <!--文字风格:32px, #000000 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Bigger.Black">
+        <item name="android:textColor">@color/color_text_000000</item>
+    </style>
+    <!--文字风格:32px, #333333 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Bigger.BlackGray">
+        <item name="android:textColor">@color/color_text_333333</item>
+    </style>
+    <!--文字风格:32px, #333333, 加粗 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Bigger.BlackGray.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <!--文字风格:32px, #666666 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Bigger.DimGray">
+        <item name="android:textColor">@color/color_text_666666</item>
+    </style>
+    <!--文字风格:32px, #999999 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Bigger.Gray">
+        <item name="android:textColor">@color/color_text_999999</item>
+    </style>
+    <!--文字风格:32px, #ffffff zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Bigger.White">
+        <item name="android:textColor">@color/color_text_ffffff</item>
+    </style>
+    <!--文字风格:32px, #72abf1 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Bigger.SkyBlue">
+        <item name="android:textColor">@color/color_text_72abf1</item>
+    </style>
+    <!--文字风格:32px, #fc8825 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Bigger.CypOrange">
+        <item name="android:textColor">@color/color_text_fc8825</item>
+    </style>
+    <!--文字风格:32px, #808080 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Bigger.SlateGray">
+        <item name="android:textColor">@color/color_text_808080</item>
+    </style>
+    <!--文字风格:32px, #24899c zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Bigger.SeaGreen">
+        <item name="android:textColor">@color/color_text_24899c</item>
+    </style>
+    <!--文字风格:32px, #ff4848 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Bigger.Tomato">
+        <item name="android:textColor">@color/color_text_ff4848</item>
+    </style>
+    <!--文字风格:32px, #c7c7c7 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Bigger.LightGrey">
+        <item name="android:textColor">@color/color_text_c7c7c7</item>
+    </style>
+
+    <!--文字风格:30px, #000000 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Big.Black">
+        <item name="android:textColor">@color/color_text_000000</item>
+    </style>
+    <!--文字风格:30px, #333333 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Big.BlackGray">
+        <item name="android:textColor">@color/color_text_333333</item>
+    </style>
+    <!--文字风格:30px, #333333, 加粗 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Big.BlackGray.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <!--文字风格:30px, #666666 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Big.DimGray">
+        <item name="android:textColor">@color/color_text_666666</item>
+    </style>
+    <!--文字风格:30px, #999999 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Big.Gray">
+        <item name="android:textColor">@color/color_text_999999</item>
+    </style>
+    <!--文字风格:30px, #ffffff zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Big.White">
+        <item name="android:textColor">@color/color_text_ffffff</item>
+    </style>
+    <!--文字风格:30px, #72abf1 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Big.SkyBlue">
+        <item name="android:textColor">@color/color_text_72abf1</item>
+    </style>
+    <!--文字风格:30px, #fc8825 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Big.CypOrange">
+        <item name="android:textColor">@color/color_text_fc8825</item>
+    </style>
+    <!--文字风格:30px, #808080 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Big.SlateGray">
+        <item name="android:textColor">@color/color_text_808080</item>
+    </style>
+    <!--文字风格:30px, #24899c zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Big.SeaGreen">
+        <item name="android:textColor">@color/color_text_24899c</item>
+    </style>
+    <!--文字风格:30px, #ff4848 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Big.Tomato">
+        <item name="android:textColor">@color/color_text_ff4848</item>
+    </style>
+    <!--文字风格:30px, #c7c7c7 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Big.LightGrey">
+        <item name="android:textColor">@color/color_text_c7c7c7</item>
+    </style>
+
+    <!--文字风格:28px, #000000 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Middle.Black">
+        <item name="android:textColor">@color/color_text_000000</item>
+    </style>
+    <!--文字风格:28px, #333333 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Middle.BlackGray">
+        <item name="android:textColor">@color/color_text_333333</item>
+    </style>
+    <!--文字风格:28px, #333333, 加粗 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Middle.BlackGray.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <!--文字风格:28px, #666666 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Middle.DimGray">
+        <item name="android:textColor">@color/color_text_666666</item>
+    </style>
+    <!--文字风格:28px, #999999 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Middle.Gray">
+        <item name="android:textColor">@color/color_text_999999</item>
+    </style>
+    <!--文字风格:28px, #ffffff zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Middle.White">
+        <item name="android:textColor">@color/color_text_ffffff</item>
+    </style>
+    <!--文字风格:28px, #72abf1 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Middle.SkyBlue">
+        <item name="android:textColor">@color/color_text_72abf1</item>
+    </style>
+    <!--文字风格:28px, #fc8825 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Middle.CypOrange">
+        <item name="android:textColor">@color/color_text_fc8825</item>
+    </style>
+    <!--文字风格:28px, #808080 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Middle.SlateGray">
+        <item name="android:textColor">@color/color_text_808080</item>
+    </style>
+    <!--文字风格:28px, #24899c zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Middle.SeaGreen">
+        <item name="android:textColor">@color/color_text_24899c</item>
+    </style>
+    <!--文字风格:28px, #ff4848 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Middle.Tomato">
+        <item name="android:textColor">@color/color_text_ff4848</item>
+    </style>
+    <!--文字风格:28px, #c7c7c7 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Middle.LightGrey">
+        <item name="android:textColor">@color/color_text_c7c7c7</item>
+    </style>
+
+    <!--文字风格:26px, #000000 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Small.Black">
+        <item name="android:textColor">@color/color_text_000000</item>
+    </style>
+    <!--文字风格:26px, #333333 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Small.BlackGray">
+        <item name="android:textColor">@color/color_text_333333</item>
+    </style>
+    <!--文字风格:26px, #333333, 加粗 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Small.BlackGray.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <!--文字风格:26px, #666666 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Small.DimGray">
+        <item name="android:textColor">@color/color_text_666666</item>
+    </style>
+    <!--文字风格:26px, #999999 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Small.Gray">
+        <item name="android:textColor">@color/color_text_999999</item>
+    </style>
+    <!--文字风格:26px, #ffffff zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Small.White">
+        <item name="android:textColor">@color/color_text_ffffff</item>
+    </style>
+    <!--文字风格:26px, #72abf1 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Small.SkyBlue">
+        <item name="android:textColor">@color/color_text_72abf1</item>
+    </style>
+    <!--文字风格:26px, #fc8825 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Small.CypOrange">
+        <item name="android:textColor">@color/color_text_fc8825</item>
+    </style>
+    <!--文字风格:26px, #808080 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Small.SlateGray">
+        <item name="android:textColor">@color/color_text_808080</item>
+    </style>
+    <!--文字风格:26px, #24899c zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Small.SeaGreen">
+        <item name="android:textColor">@color/color_text_24899c</item>
+    </style>
+    <!--文字风格:26px, #ff4848 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Small.Tomato">
+        <item name="android:textColor">@color/color_text_ff4848</item>
+    </style>
+    <!--文字风格:26px, #c7c7c7 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Small.LightGrey">
+        <item name="android:textColor">@color/color_text_c7c7c7</item>
+    </style>
+
+    <!--文字风格:24px, #000000 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Smaller.Black">
+        <item name="android:textColor">@color/color_text_000000</item>
+    </style>
+    <!--文字风格:24px, #333333 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Smaller.BlackGray">
+        <item name="android:textColor">@color/color_text_333333</item>
+    </style>
+    <!--文字风格:24px, #333333, 加粗 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Smaller.BlackGray.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <!--文字风格:24px, #666666 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Smaller.DimGray">
+        <item name="android:textColor">@color/color_text_666666</item>
+    </style>
+    <!--文字风格:24px, #999999 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Smaller.Gray">
+        <item name="android:textColor">@color/color_text_999999</item>
+    </style>
+    <!--文字风格:24px, #ffffff zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Smaller.White">
+        <item name="android:textColor">@color/color_text_ffffff</item>
+    </style>
+    <!--文字风格:24px, #72abf1 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Smaller.SkyBlue">
+        <item name="android:textColor">@color/color_text_72abf1</item>
+    </style>
+    <!--文字风格:24px, #fc8825 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Smaller.CypOrange">
+        <item name="android:textColor">@color/color_text_fc8825</item>
+    </style>
+    <!--文字风格:24px, #808080 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Smaller.SlateGray">
+        <item name="android:textColor">@color/color_text_808080</item>
+    </style>
+    <!--文字风格:24px, #24899c zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Smaller.SeaGreen">
+        <item name="android:textColor">@color/color_text_24899c</item>
+    </style>
+    <!--文字风格:24px, #ff4848 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Smaller.Tomato">
+        <item name="android:textColor">@color/color_text_ff4848</item>
+    </style>
+    <!--文字风格:24px, #c7c7c7 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Smaller.LightGrey">
+        <item name="android:textColor">@color/color_text_c7c7c7</item>
+    </style>
+
+    <!--文字风格:22px, #000000 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Smallest.Black">
+        <item name="android:textColor">@color/color_text_000000</item>
+    </style>
+    <!--文字风格:22px, #333333 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Smallest.BlackGray">
+        <item name="android:textColor">@color/color_text_333333</item>
+    </style>
+    <!--文字风格:22px, #333333, 加粗 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Smallest.BlackGray.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <!--文字风格:22px, #666666 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Smallest.DimGray">
+        <item name="android:textColor">@color/color_text_666666</item>
+    </style>
+    <!--文字风格:22px, #999999 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Smallest.Gray">
+        <item name="android:textColor">@color/color_text_999999</item>
+    </style>
+    <!--文字风格:22px, #ffffff zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Smallest.White">
+        <item name="android:textColor">@color/color_text_ffffff</item>
+    </style>
+    <!--文字风格:22px, #72abf1 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Smallest.SkyBlue">
+        <item name="android:textColor">@color/color_text_72abf1</item>
+    </style>
+    <!--文字风格:22px, #fc8825 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Smallest.CypOrange">
+        <item name="android:textColor">@color/color_text_fc8825</item>
+    </style>
+    <!--文字风格:22px, #808080 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Smallest.SlateGray">
+        <item name="android:textColor">@color/color_text_808080</item>
+    </style>
+    <!--文字风格:22px, #24899c zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Smallest.SeaGreen">
+        <item name="android:textColor">@color/color_text_24899c</item>
+    </style>
+    <!--文字风格:22px, #ff4848 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Smallest.Tomato">
+        <item name="android:textColor">@color/color_text_ff4848</item>
+    </style>
+    <!--文字风格:22px, #c7c7c7 zhoujunyi 20151111-->
+    <style name="CheYiPai.TextAppearance.Style.Smallest.LightGrey">
+        <item name="android:textColor">@color/color_text_c7c7c7</item>
+    </style>
+    <!--文字风格:30px, #323232 donghui 20151202-->
+    <style name="CheYiPai.TextAppearance.Style.Big.black">
+        <item name="android:textColor">@color/color_text_323232</item>
+    </style>
+    <!--文字风格:30px, #72fabf2 donghui 20151202-->
+    <style name="CheYiPai.TextAppearance.Style.Big.Blue">
+        <item name="android:textColor">@color/color_text_72abf2</item>
+    </style>
+    CheYiPai.TextAppearance.Style.Big
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+
+    <!--文字风格:中字号，白色字 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.ExBiggest.Orange">
+        <item name="android:textColor">@color/color_text_orange</item>
+    </style>
+    <!--文字风格:最大字号，白色字 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Biggest.White">
+        <item name="android:textColor">@color/color_text_white</item>
+    </style>
+    <!--文字风格:最大字号，黑色字 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Biggest.Black">
+        <item name="android:textColor">@color/color_text_black</item>
+    </style>
+    <!--文字风格:最大字号，灰白色字 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Biggest.GrayWhite">
+        <item name="android:textColor">@color/color_text_graywhite</item>
+    </style>
+    <!--文字风格:更大字号，灰白色字 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Bigger.GrayWhite">
+        <item name="android:textColor">@color/color_text_graywhite</item>
+    </style>
+    <!--文字风格:更大字号，灰白色字 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Bigger.c2c2c2">
+        <item name="android:textColor">@color/color_text_c2c2c2</item>
+    </style>
+    <!--文字风格:最大字号，默认黑色字 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Bigger.BlackDefault">
+        <item name="android:textColor">@color/text_default</item>
+    </style>
+    <!--文字风格:更大字号，黑色字 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Bigger.Black">
+        <item name="android:textColor">@color/color_text_black</item>
+    </style>
+    <!--文字风格:更大字号，检测师描述文字字色 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Bigger.MasterDes">
+        <item name="android:textColor">@color/color_text_detail_test_master_des</item>
+    </style>
+    <!--文字风格:大字号，桔色字 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Big.Orange">
+        <item name="android:textColor">@color/color_text_orange</item>
+    </style>
+
+    <style name="CheYiPai.TextAppearance.Big.DarkRed">
+        <item name="android:textColor">@color/color_text_dark_red</item>
+    </style>
+    <!--文字风格:大字号，灰色-->
+    <style name="CheYiPai.TextAppearance.Big.GRAY_666666">
+        <item name="android:textColor">@color/color_text_666666</item>
+    </style>
+
+    <!--文字风格:比较大字号，桔色字 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Bigger.Orange">
+        <item name="android:textColor">@color/color_text_orange</item>
+    </style>
+    <!--文字风格:比较大字号，橘色fc8825-->
+    <style name="CheYiPai.TextAppearance.Bigger.Orange_fc8825">
+        <item name="android:textColor">@color/color_text_orange_fc8825</item>
+    </style>
+    <!--文字风格:大字号，白色字 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Big.White">
+        <item name="android:textColor">@color/color_text_white</item>
+    </style>
+    <!--文字风格:大字号，白色字 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Big.FaintGray">
+        <item name="android:textColor">@color/color_text_faint_gray</item>
+    </style>
+    <!--文字风格:大字号，灰白色字 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Big.GrayWhite">
+        <item name="android:textColor">@color/color_text_graywhite</item>
+    </style>
+    <!--文字风格:大字号，橘色色字 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Big.FaintOrange">
+        <item name="android:textColor">@color/color_text_faint_orange</item>
+    </style>
+    <!--文字风格:大字号，冬青黑色字 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Big.HollyBlack">
+        <item name="android:textColor">@color/color_text_holly_black</item>
+    </style>
+    <!--文字风格:大字号，红色字 DH 20150709-->
+    <style name="CheYiPai.TextAppearance.Big.RED">
+        <item name="android:textColor">@color/sellcar_btn_bg</item>
+    </style>
+    <!--文字风格:中字号，冬青黑色字 DH 20150708-->
+    <style name="CheYiPai.TextAppearance.Middle.BLACK">
+        <item name="android:textColor">@color/sellcar_text_four</item>
+    </style>
+    <!--文字风格:中字号，黑色333333-->
+    <style name="CheYiPai.TextAppearance.Middle.BLACK_333333">
+        <item name="android:textColor">@color/color_text_333333</item>
+    </style>
+
+    <!--文字风格:中字号，灰色666666-->
+    <style name="CheYiPai.TextAppearance.Middle.GRAY_666666">
+        <item name="android:textColor">@color/color_text_666666</item>
+    </style>
+    <!--文字风格:中小字号，红色ff4848-->
+    <style name="CheYiPai.TextAppearance.MiddleSmall.DARK_RED">
+        <item name="android:textColor">@color/color_text_dark_red</item>
+    </style>
+    <!--文字风格:中小字号，冬青黑色字 DH 20150708-->
+    <style name="CheYiPai.TextAppearance.MiddleSmall.BLACK">
+        <item name="android:textColor">@color/sellcar_text_four</item>
+    </style>
+    <!--文字风格:中小字号，冬青黑色字 DH 20150708-->
+    <style name="CheYiPai.TextAppearance.MiddleSmall.BLACKH">
+        <item name="android:textColor">@color/car_name_text</item>
+    </style>
+    <!--文字风格:中小字号，黑色-->
+    <style name="CheYiPai.TextAppearance.MiddleSmall.BLACK_333333">
+        <item name="android:textColor">@color/color_text_333333</item>
+    </style>
+    <!--文字风格:中小字号，灰色-->
+    <style name="CheYiPai.TextAppearance.MiddleSmall.GRAY_999999">
+        <item name="android:textColor">@color/color_text_999999</item>
+    </style>
+    <!--文字风格:中小字号，蓝色-->
+    <style name="CheYiPai.TextAppearance.MiddleSmall.BLUE_SEE_MORE">
+        <item name="android:textColor">@color/color_text_blue_see_more</item>
+    </style>
+    <!--文字风格:小字号，灰色-->
+    <style name="CheYiPai.TextAppearance.Small.GRAY_999999">
+        <item name="android:textColor">@color/color_text_999999</item>
+    </style>
+    <!--文字风格:小字号，灰色-->
+    <style name="CheYiPai.TextAppearance.Smaller.GRAY_999999">
+        <item name="android:textColor">@color/color_text_999999</item>
+    </style>
+    <!--文字风格:小字号，灰色-->
+    <style name="CheYiPai.TextAppearance.Smaller.GRAY_cbcbcb">
+        <item name="android:textColor">@color/color_text_cbcbcb</item>
+    </style>
+
+    <!--文字风格:中字号，白色字 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Middle.White">
+        <item name="android:textColor">@color/color_text_white</item>
+    </style>
+    <!--文字风格:中字号，深灰色字 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Middle.DeepGray">
+        <item name="android:textColor">@color/color_text_deep_gray</item>
+    </style>
+    <!--文字风格:中字号，灰色字 999999-->
+    <style name="CheYiPai.TextAppearance.Smaller.Gray_999999">
+        <item name="android:textColor">@color/color_text_999999</item>
+    </style>
+    <!--文字风格:中字号，深灰色字 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Middle.FaintGray">
+        <item name="android:textColor">@color/color_text_faint_gray</item>
+    </style>
+    <!--文字风格:中字号，深灰色字 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Middle.LightGray">
+        <item name="android:textColor">@color/color_text_light_gray</item>
+    </style>
+    <!--文字风格:小字号，检测师描述文字字色 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Small.MasterDes">
+        <item name="android:textColor">@color/color_text_detail_test_master_des</item>
+    </style>
+    <!--文字风格:小字号，黑色-->
+    <style name="CheYiPai.TextAppearance.Small.HollyBlack">
+        <item name="android:textColor">@color/color_text_holly_black</item>
+    </style>
+    <!--文字风格:小字号，检测师描述文字字色 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Middle.MasterDes">
+        <item name="android:textColor">@color/color_text_detail_test_master_des</item>
+    </style>
+    <!--文字风格:小字号，桔色字色 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Small.Orange">
+        <item name="android:textColor">@color/color_text_orange</item>
+    </style>
+    <!--文字风格:中字号，白色字 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Middle.Black">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="CheYiPai.TextAppearance.Middle.HollyBlack">
+        <item name="android:textColor">@color/color_text_holly_black</item>
+    </style>
+    <!--爱车界面字体-->
+    <style name="CheYiPai.TextAppearance.Middler.AddCarBlack">
+        <item name="android:textColor">@color/car_name_text</item>
+    </style>
+    <style name="CheYiPai.TextAppearance.MiddleSmall.AddCarGrey">
+        <item name="android:textColor">@color/index_list_item_gray</item>
+    </style>
+
+    <style name="CheYiPai.TextAppearance.Middle.Orange">
+        <item name="android:textColor">@color/color_text_orange</item>
+    </style>
+    <!--文字风格:中字号橘色 -->
+    <style name="CheYiPai.TextAppearance.Middle.Orange_fc8825">
+        <item name="android:textColor">@color/color_text_orange_fc8825</item>
+    </style>
+    <!--文字风格:小字号橘色 -->
+    <style name="CheYiPai.TextAppearance.Smaller.Orange_fc8825">
+        <item name="android:textColor">@color/color_text_orange_fc8825</item>
+    </style>
+
+    <!--文字风格:更小字号，淡灰色字 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Smaller.FaintGray">
+        <item name="android:textColor">@color/color_text_faint_gray</item>
+    </style>
+    <!--文字风格:更小字号，淡灰色字 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Smaller.LightGray">
+        <item name="android:textColor">@color/color_text_light_gray</item>
+    </style>
+
+    <style name="CheYiPai.TextAppearance.Smaller.333333">
+        <item name="android:textColor">@color/color_text_333333</item>
+    </style>
+
+    <style name="CheYiPai.TextAppearance.Small.333333">
+        <item name="android:textColor">@color/color_text_333333</item>
+    </style>
+
+    <!--文字风格:更小字号，淡淡灰色字 YQH 20140221-->
+    <style name="CheYiPai.TextAppearance.Smaller.Gray">
+        <item name="android:textColor">@color/index_list_item_gray</item>
+    </style>
+    <!--文字风格:最小字号，淡淡灰色字 -->
+    <style name="CheYiPai.TextAppearance.Smallest.Gray">
+        <item name="android:textColor">@color/index_list_item_gray</item>
+    </style>
+    <!--文字风格:中小字号，淡淡灰色字 -->
+    <style name="CheYiPai.TextAppearance.MiddleSmall.Gray">
+        <item name="android:textColor">@color/index_list_item_gray</item>
+    </style>
+
+    <!--文字风格:中小字号，灰色666666 -->
+    <style name="CheYiPai.TextAppearance.MiddleSmall.Gray_666666">
+        <item name="android:textColor">@color/color_text_666666</item>
+    </style>
+
+    <!-- 大字号  红色-->
+    <style name="CheYiPai.TextAppearance.Bigger.Red">
+        <item name="android:textColor">@color/line_sell_car_most</item>
+
+    </style>
+    <!--小字号 白色 -->
+    <style name="CheYiPai.TextAppearance.Smaller.White">
+        <item name="android:textColor">@color/color_text_white</item>
+    </style>
+    <!-- 最小字号 淡蓝色-->
+    <style name="CheYiPai.TextAppearance.Smallest.Bluer">
+        <item name="android:textColor">@color/seller_car</item>
+    </style>
+    <!-- 中字号 淡蓝色-->
+    <style name="CheYiPai.TextAppearance.MiddleSmall.Bluer">
+        <item name="android:textColor">@color/seller_car</item>
+    </style>
+    <!-- 小字体 蓝色-->
+    <style name="CheYiPai.TextAppearance.Smallest.Blue">
+        <item name="android:textColor">@color/year_month</item>
+    </style>
+
+    <!-- 大字号 白色-->
+    <style name="CheYiPai.TextAppearance.Bigger.White">
+        <item name="android:textColor">@color/color_text_white</item>
+    </style>
+    <!-- 中号字体 灰-->
+    <style name="CheYiPai.TextAppearance.Middle.GreyHint">
+        <item name="android:textColor">@color/ccp_attentoin_color</item>
+    </style>
+
+    <style name="CheYiPai.TextAppearance.MiddleSmall.Red">
+        <item name="android:textColor">@color/line_sell_car_most</item>
+    </style>
+
+
+    <!--收藏 checkbox-->
+    <style name="favCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox_custom</item>
+    </style>
+    <!--事件弹窗样式-->
+    <style name="YearMonthDialog" parent="android:style/Theme.Dialog">
+        <item name="android:background">#00000000</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
+    <style name="text_18_ffffff">
+        <item name="android:textSize">18.0dip</item>
+        <item name="android:textColor">#ffffffff</item>
+    </style>
+
+    <style name="text_15_ffffff_sdw" parent="@style/sdw_79351b">
+        <item name="android:textSize">15.0dip</item>
+        <item name="android:textColor">#ffffffff</item>
+    </style>
+
+    <style name="text_15_666666_sdw" parent="@style/sdw_white">
+        <item name="android:textSize">15.0dip</item>
+        <item name="android:textColor">#ff666666</item>
+    </style>
+    <style name="sdw_white">
+        <item name="android:shadowColor">#7fffffff</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">0.65</item>
+        <item name="android:shadowRadius">1.0</item>
+    </style>
+    <style name="sdw_79351b">
+        <item name="android:shadowColor">#ff79351b</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1.0</item>
+    </style>
+    <!--评估车价字体样式-->
+    <style name="CheYiPai.TextAppearance.Middle.ReportCarLeft">
+        <item name="android:textColor">@color/car_report_name_left</item>
+        <item name="android:textSize">@dimen/text_size_middle_small</item>
+    </style>
+    <style name="CheYiPai.TextAppearance.MiddleSmall.ReportCarLeft">
+        <item name="android:textColor">@color/car_report_name_left</item>
+    </style>
+    <style name="CheYiPai.TextAppearance.Smaller.ReportCarRight">
+        <item name="android:textColor">@color/car_report_name_right</item>
+    </style>
+    <style name="CheYiPai.TextAppearance.MiddleSmall.ReportCarRight">
+        <item name="android:textColor">@color/car_report_name_right</item>
+    </style>
+
+
+    <!-- 订单追踪样式 -->
+    <style name="CheYiPai.TextAppearance.Style.Smaller.White.TraceTextBottom">
+        <item name="android:gravity">center_horizontal|bottom</item>
+    </style>
+    <style name="CheYiPai.TextAppearance.Style.Smaller.Gray.TraceTextBottom">
+        <item name="android:gravity">center_horizontal|bottom</item>
+    </style>
+    <style name="CheYiPai.TextAppearance.Style.Smaller.Gray.TraceTextTop">
+        <item name="android:gravity">center_horizontal|top</item>
+    </style>
+    <style name="CheYiPai.TextAppearance.Style.Biggest.White.OrderDetailBottemButtonText">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">@dimen/dimen_10</item>
+        <item name="android:layout_marginRight">@dimen/dimen_10</item>
+        <item name="android:layout_marginLeft">@dimen/dimen_10</item>
+    </style>
+    <style name="CheYiPai.TextAppearance.Style.Biggest.Gray.OrderDetailBottemButtonText">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">@dimen/dimen_10</item>
+        <item name="android:layout_marginRight">@dimen/dimen_10</item>
+        <item name="android:layout_marginLeft">@dimen/dimen_10</item>
+    </style>
+
+    <style name="HorizScrollViewItem">
+        <item name="android:paddingRight">50dp</item>
+        <item name="android:paddingLeft">50dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:text">Sample Item</item>
+    </style>
+</resources>

@@ -1,0 +1,239 @@
+<resources>
+
+    <!-- 用户模块定义属性 -->
+    <color name="text_red">#ff5600</color>
+    <color name="edit_bg_color">#f0f0f0</color>
+    <color name="text_grey_color">#595959</color>
+    <!-- 主题背景色-->
+
+    <color name="main_color_red">#e23939</color>
+
+    <color name="commom_view_grey">#e8ebeb</color>
+
+    <color name="call_color_green">#30A438</color>
+
+    <color name="list_select_color">#EBEBEB</color>
+
+
+    <color name="myself_my_color_head_bg">#FCFCFC</color>
+    <!-- 灰色 -->
+
+    <color name="index_tab_bg">#e2f2ff</color>
+    <color name="table_line_color">#e7f2f9</color>
+    <color name="index_list_item_sub_font">#82858b</color>
+    <color name="loading_background">#70000000</color>
+    <!-- 浅灰色 -->
+    <color name="color_gray">#EDEDED</color>
+    <!-- 中灰色 -->
+    <color name="color_medium_gray">#cdcdcd</color>
+    <color name="background_gray">#DCDCDC</color>
+    <color name="index_list_bg">#f7f7f8</color>
+    <color name="index_list_item_gray">#999999</color>
+    <color name="discover_list_bg">#ebebeb</color>
+
+
+    <!-- button背景色 -->
+    <color name="button_background">#e54744</color>
+
+    <!-- button背景色 -->
+    <color name="line_color">#e5e5e5</color>
+
+
+    <!-- smoke white -->
+    <color name="smokeWhite">#F5F5F5</color>
+    <!-- video colors -->
+
+    <color name="index_gray_bg">#f7f9fa</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="darkRed">#AA2222</color>
+    <color name="lightDarkRed">#ff4848</color>
+    <color name="darkGrey">#848284</color>
+    <color name="blue">#0000FF</color>
+    <color name="black">#FF000000</color>
+    <color name="flash">#D3EBF7</color>
+    <color name="half_transparent">#66000000</color>
+    <color name="transparency_white">#00000000</color>
+    <color name="half_transparent_bg">#99000000</color>
+    <color name="white_half_transparent">#66ffffff</color>
+    <!-- 淡色 -->
+    <color name="lightBlue">#00A8FF</color>
+    <color name="oilPriceBlue">#529bff</color>
+    <color name="lightRed">#ff817d</color>
+    <color name="lightYellow">#F9FB6B</color>
+    <color name="lightGreen">#00CD66</color>
+    <color name="lightPurple">#9370DB</color>
+    <color name="lightOrange">#FBB844</color>
+    <color name="yellowOrange">#ffbb15</color>
+    <color name="darkOrange">#ff7f00</color>
+    <color name="holoRed">#ff5a59</color>
+    <color name="lightGrey">#CBCED0</color>
+    <color name="query_free">#708FF6</color>
+    <color name="darkGray">#969395</color>
+    <color name="query_free_sms_title">#277fbd</color>
+    <color name="transparent">#00ffffff</color>
+    <color name="expandable_listview_driver">#c8c7cc</color>
+    <color name="popupwindow_listview_driver">#e1e1e1</color>
+    <color name="expandable_listview_item_pressed">#99c8c7cc</color>
+    <color name="voip_interface_text_color">#bababa</color>
+
+    <drawable name="group_chat_bg_normal">#f4f4f4</drawable>
+    <drawable name="group_chat_bg_pressed">#9ed031</drawable>
+
+    <color name="pop_window_pressed_back">#ff277fbd</color>
+    <color name="header_btn_backgroud_press_color">#ff053e58</color>
+    <color name="lightgrey">#ff888888</color>
+
+    <drawable name="video_notify_original_state">#55BC75</drawable>
+    <drawable name="video_notify_new_state">#222222</drawable>
+
+    <color name="ccp_alert_bg">#3F474A</color>
+    <color name="ccp_translucent_half">#b0000000</color>
+    <color name="ccp_video_transparent">#f0000000</color>
+
+    <!-- version 3.6 -->
+    <!-- developer mode launcher normal color -->
+    <color name="ccp_developer_normal">#B6D556</color>
+    <!-- developer mode launcher pressed color -->
+    <color name="ccp_developer_pressed">#88A040</color>
+    <!-- experience mode launcher normal color -->
+    <color name="ccp_experience_normal">#55BC75</color>
+    <!-- experience mode launcher normal color -->
+    <color name="ccp_experience_pressed">#408D58</color>
+    <color name="ccp_attentoin_color">#cccccc</color>
+
+    <color name="blue_light">#51a3ff</color>
+    <color name="background_tab_pressed">#6633B5E5</color>
+
+    <!--文字色值：深灰 标题类 YQH 20140410-->
+    <color name="color_text_deep_gray">#3e3a39</color>
+    <!--文字色值：中灰  YQH 20140410-->
+    <color name="color_text_middle_gray">#666666</color>
+    <!--文字色值：搜索hint字色  YQH 20140410-->
+    <color name="color_text_middler_gray">#8e8e93</color>
+    <!--文字色值：浅灰 (主色)钱、部分标题 YQH 20140410-->
+    <color name="color_text_light_gray">#9fa0a0</color>
+    <!--文字色值：淡灰 副标题，注释、搜索、车名等 YQH 20140410-->
+    <color name="color_text_faint_gray">#b5b5b6</color>
+    <!--文字色值：车辆详情页检测师描述字色 YQH 20140410-->
+    <color name="color_text_detail_test_master_des">#727171</color>
+
+    <!--文字色值：黑  YQH 20140410-->
+    <color name="color_text_black">#000000</color>
+    <!--文字色值：冬青黑-->
+    <color name="color_text_holly_black">#3e3a39</color>
+    <!--文字色值：较黑  YQH 20140410-->
+    <color name="text_default">#3e3a39</color>
+    <!--文字色值：灰白色  YQH 20140410-->
+    <color name="color_text_graywhite">#cccccc</color>
+    <!--文字色值：c2c2c2   YQH 20140410-->
+    <color name="color_text_c2c2c2">#c2c2c2</color>
+    <!--文字色值：白色文字 YQH 20140410-->
+    <color name="color_text_white">#ffffff</color>
+    <!--文字色值：白色文字 YQH 20140410-->
+
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- 新版style zhoujunyi 20151110-->
+    <color name="color_text_000000">#000000</color>
+    <color name="color_text_333333">#333333</color>
+    <color name="color_text_666666">#666666</color>
+    <color name="color_text_999999">#999999</color>
+    <color name="color_text_ffffff">#ffffff</color>
+    <color name="color_text_72abf1">#72abf1</color>
+    <color name="color_text_fc8825">#fc8825</color>
+    <color name="color_text_808080">#808080</color>
+    <color name="color_text_24899c">#24899c</color>
+    <color name="color_text_ff4848">#ff4848</color>
+    <color name="color_text_c7c7c7">#c7c7c7</color>
+    <color name="color_text_323232">#323232</color>
+    <color name="color_text_ff8a21">#ff8a21</color>
+    <color name="color_text_72abf2">#72abf2</color>
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+    <!--文字色值：灰cbcbcb-->
+    <color name="color_text_cbcbcb">#cbcbcb</color>
+
+    <!--文字色值：蓝色，查看详情-->
+    <color name="color_text_blue_see_more">#3783ca</color>
+
+    <!--文字色值：深绿  YQH 20140410-->
+    <color name="color_text_deep_green">#3e4f38</color>
+    <!--文字色值：绿  YQH 20140410-->
+    <color name="color_text_green">#009900</color>
+    <!--文字色值：绿  YQH 20140410-->
+    <color name="color_text_green_62b553">#62b553</color>
+    <!--文字色值：浅绿  YQH 20140410-->
+    <color name="color_text_light_green">#a0dd8d</color>
+    <!--文字色值：淡绿  YQH 20140410-->
+    <color name="color_text_faint_green">#cff2c4</color>
+    <!--文字色值：#ECECEC-->
+    <color name="color_text_ececec">#ECECEC</color>
+    <!--文字色值：#A27F5d-->
+    <color name="color_text_a27f5d">#A27F5d</color>
+    <!--文字色值：#D3A257-->
+    <color name="color_text_d3a257">#D3A257</color>
+    <!--文字色值：#343434-->
+    <color name="color_text_dialog_title">#343434</color>
+    <!--字色 YQH 20150610-->
+    <color name="carpurchase_car_list_item_line">#f7f9fa</color>\
+
+    <color name="color_text_f3f2ed">#f3f2ed</color>
+    <color name="color_text_f3f4ec">#f3f4ec</color>
+    <!--字色 (主色)钱、部分标题 YQH 20150610-->
+    <color name="color_text_orange">#ff5600</color>
+    <color name="color_text_orange_fc8825">#fc8825</color>
+    <!--优价卖车 -->
+    <color name="color_text_dark_red">#ff4848</color>
+
+    <!--卖车：冬青黑-->
+    <color name="sellcar_text_book">#333333</color>
+    <color name="sellcar_text_four">#595757</color>
+    <color name="sellcar_text_cartype">#9fa0a0</color>
+    <color name="sellcar_filter_letter_item_bg">#f7f7f7</color>
+    <color name="sellcar_bg">#f2f3f3</color>
+    <color name="sellcar_btn_bg">#ff5600</color>
+    <!--个人中心：颜色 -->
+    <color name="center_view">#262626</color>
+    <color name="center_bg">#1c1b1a</color>
+    <color name="center_num">#c9caca</color>
+    <color name="year_month">#72ABF2</color>
+    <color name="order_id">#999999</color>
+    <color name="order_status_font">#72abf2</color>
+
+    <!--标题栏底线色值 YQH 20150610-->
+    <color name="actionbar_line">#ff5600</color>
+    <!--车辆详情页灰色背景 YQH 20150615-->
+    <color name="car_details_bg_gray">#f2f2f3</color>
+    <!--个人中心 点击背景颜色-->
+    <color name="center_press">#32302e</color>
+    <!--橘黄色按钮点击后颜色-->
+    <color name="orange_btn_press">#c34403</color>
+    <color name="slidebar_text_blue">#007aff</color>
+    <!--车辆名称栏-->
+    <color name="car_name_text">#333333</color>
+    <!-- 商家收购最大值-->
+    <color name="line_sell_car_most">#ff8a34</color>
+    <!-- 线上拍卖-->
+    <color name="seller_car">#9BCDE4</color>
+    <!-- 错误页面 重新刷新色值-->
+    <color name="color_text_faint_orange">#ff8a23</color>
+    <color name="orange_background_press_color">#fec279</color>
+
+    <!--小易dialog确定按钮背景色-->
+    <color name="xiaoyi_button_confirm">#fe8b23</color>
+
+    <!--小易dialog背景色-->
+    <color name="xiaoyi_dialog_background_color">#fffaec</color>
+    <!--view 颜色-->
+    <color name="common_view_grey">#e5e5e5</color>
+    <!--  评估车价-->
+    <color name="get_car_report_btn">#ff4848</color>
+    <color name="get_car_report_bg">#f3f3f3</color>
+    <color name="car_report_name_left">#666666</color>
+    <color name="car_report_name_right">#c7c7c7</color>
+    <!--城市选择-->
+    <color name="city_choose_group_letter">#f8f8f8</color>
+    <color name="city_choose_childe_letter">#ffffff</color>
+
+    <color name="common_background_grey">#f8f8f8</color>
+    <color name="common_list_grey">#f4f4f4</color>
+</resources>
