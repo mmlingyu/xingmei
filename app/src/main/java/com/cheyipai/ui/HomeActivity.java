@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,9 +34,10 @@ public class HomeActivity extends AbsBaseActivity {
 
     private BannerFragment mBannerFragment;
 
-    @InjectView(R.id.tvLocation)
-    protected TextView location;
-
+    @InjectView(R.id.hair_store_tv)
+    protected TextView hair_store_tv;
+    @InjectView(R.id.man_tv)
+    protected TextView all_tv;
 
     /**
      * 设置布局文件
@@ -60,6 +62,7 @@ public class HomeActivity extends AbsBaseActivity {
         openEventBus();
         checkVersion();
         openAppStatitcs();
+       //TextViewh all_tv.setText(getRadiusGradientSpan("全部",0xFFec4ce6,0xfffa4a6f));
     }
 
     private void openAppStatitcs(){
@@ -89,8 +92,8 @@ public class HomeActivity extends AbsBaseActivity {
     }
 
 
-    @OnClick(R.id.tvLocation)
-    public void showWindow(View view){
+    @OnClick(R.id.hair_store_tv)
+    public void showStore(View view){
 
     }
 

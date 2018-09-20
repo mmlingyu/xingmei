@@ -3,6 +3,11 @@ android {
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
     useLibrary 'org.apache.http.legacy'
+    aaptOptions {
+            cruncherEnabled = false
+            useNewCruncher = false
+
+        }
     defaultConfig {
         applicationId "com.cheyipai.ui"
         minSdkVersion 16
@@ -18,7 +23,6 @@ android {
         enabled = true
     }
     dexOptions {
-        incremental true
         javaMaxHeapSize "4g"
 
     }

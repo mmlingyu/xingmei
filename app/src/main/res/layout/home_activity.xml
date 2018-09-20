@@ -24,8 +24,9 @@
                 android:name="com.cheyipai.ui.fragment.BannerFragment"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_120"
+                android:layout_marginBottom="@dimen/dimen_10"
                 android:layout_gravity="top|center_horizontal" />
-
+            <include layout="@layout/index_panel"></include>
         </LinearLayout>
 
     </ScrollView>

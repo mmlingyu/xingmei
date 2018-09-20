@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/tabhost"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="fill_parent"
+            android:layout_height="0.0dip"
+            android:layout_weight="1.0" />
+
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.0"
+            android:visibility="gone" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.3dip"
+            android:scaleType="fitXY"
+            android:src="@drawable/line_long" />
+
+        <RadioGroup
+            android:id="@+id/main_tab"
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="0dip"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/home_intent"
+                style="@style/main_tab_bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:drawableTop="@drawable/index_tabhost_selector_mainpage"
+                android:gravity="center"
+                android:text="@string/index" />
+
+            <RadioButton
+                android:id="@+id/like_car_intent"
+                style="@style/main_tab_bottom"
+                android:layout_width="40dip"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/camera_bg"
+                android:drawableTop="@drawable/index_tabhost_selector_discover"
+                android:gravity="center"
+                android:paddingTop="@dimen/dimen_10" />
+
+            <RadioButton
+                android:id="@+id/user_intent"
+                style="@style/main_tab_bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/index_tabhost_selector_protected"
+                android:gravity="center"
+                android:text="@string/user" />
+
+
+        </RadioGroup>
+    </LinearLayout>
+
+</TabHost>

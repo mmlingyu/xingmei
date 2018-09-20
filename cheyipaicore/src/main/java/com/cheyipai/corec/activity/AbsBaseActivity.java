@@ -5,6 +5,8 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -15,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cheyipai.corec.R;
+import com.cheyipai.corec.components.LinearGradientFontSpan;
 import com.cheyipai.corec.modules.app.BaseApplication;
 import com.cheyipai.corec.event.IBaseEvent;
 import com.cheyipai.corec.log.L;
@@ -38,7 +41,13 @@ public abstract class AbsBaseActivity extends ActionBarActivity {
     private TextView actionBarRightTextView;
     private ImageView actionBarRightImageView;
     private RelativeLayout mActionbarRL;
+    public SpannableStringBuilder getRadiusGradientSpan(String string, int startColor, int endColor) {
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(string);
+        LinearGradientFontSpan span = new LinearGradientFontSpan(startColor, endColor);
+        spannableStringBuilder.setSpan(span, 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return spannableStringBuilder;
 
+    }
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         return false;

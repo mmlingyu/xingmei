@@ -26,7 +26,7 @@
         android:id="@+id/banner_default_iv"
         android:layout_width="match_parent"
         android:layout_height="120dip"
-        android:background="@drawable/index_banner_default"
+        android:background="@mipmap/index_banner_default"
         android:visibility="gone" />
 
 </FrameLayout>
