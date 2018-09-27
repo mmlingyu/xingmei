@@ -9,5 +9,11 @@
     <string name="girl">女性</string>
     <string name="face_circle">圆脸</string>
     <string name="hair_store">发型库</string>
-    <string name="palette">Palette</string>
+    <string name="cancel">取消</string>
+    <string name="sure">确认</string>
+    <string name="select_face">选择脸型</string>
+    <string name="hair_default_name">清爽迷你姑</string>
+    <string name="take_photo_test">拍照查看理发效果</string>
+    <string name="hair_intro">发型介绍</string>
+    <string name="hair_service">发型打理</string>
 </resources>

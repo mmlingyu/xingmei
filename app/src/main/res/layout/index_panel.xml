@@ -4,6 +4,7 @@
     android:background="@color/white"
     android:gravity="center_vertical"
     android:orientation="horizontal"
+    android:layout_marginBottom="@dimen/dimen_10"
     android:layout_height="fill_parent" >
     <LinearLayout
         android:id="@+id/all_rl"
@@ -26,7 +27,7 @@
     </LinearLayout>
     <TextView
         android:id="@+id/man_tv"
-        style="@style/CheYiPai.TextAppearance.Middle.BLACK_333333"
+        style="@style/CheYiPai.TextAppearance.MiddleSmall"
         android:text="@string/all"
         android:textColor="#ec4ce6"
         android:layout_width="wrap_content"
@@ -112,13 +113,14 @@
 
     <LinearLayout
         android:layout_weight="1"
+        android:id="@+id/face_ll"
         android:layout_marginRight="@dimen/dimen_15"
         android:gravity="right|center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/face_tv"
-            style="@style/CheYiPai.TextAppearance.Middle.GRAY_666666"
+            style="@style/CheYiPai.TextAppearance.MiddleSmall"
             android:text="@string/face_circle"
             android:layout_width="wrap_content"
             android:textColor="#ec4ce6"

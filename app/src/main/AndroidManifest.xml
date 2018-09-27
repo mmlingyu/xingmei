@@ -68,6 +68,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.cheyipai.ui.HomeActivity"></activity>
+        <activity android:name="com.cheyipai.ui.ui.car.HairActivity" android:configChanges="keyboardHidden|orientation|screenSize"></activity>
         <activity android:name="com.cheyipai.ui.ui.car.commons.WebViewShowActivity" android:configChanges="keyboardHidden|orientation|screenSize"></activity>
         <activity android:name="com.cheyipai.ui.UnityPlayerActivity" android:configChanges="keyboardHidden|orientation|screenSize"></activity>
 

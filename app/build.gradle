@@ -18,6 +18,11 @@ android {
             abiFilters 'armeabi-v7a', 'x86'
         }
         multiDexEnabled true
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ moduleName : project.getName() ]
+            }
+        }
     }
     dataBinding {
         enabled = true
@@ -66,5 +71,7 @@ dependencies {
     compile files('libs/unity-classes.jar')
     compile 'com.android.support:multidex:1.0.0'
     compile files('libs/Msc.jar')
+    compile 'com.alibaba:arouter-api:1.2.1'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.1.2'
     compile (name:'com.itseez3d.androidplugins',ext:'aar')
 }

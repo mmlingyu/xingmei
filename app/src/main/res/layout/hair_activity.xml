@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+    <include layout="@layout/hair_common_head" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:scrollbars="none"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="top|center_horizontal"
+                android:background="@mipmap/hair_top_shape"
+                android:gravity="center"
+                android:layout_marginBottom="@dimen/dimen_20"
+                android:layout_marginTop="@dimen/dimen_20"
+                android:layout_marginLeft="@dimen/dimen_15"
+                android:layout_marginRight="@dimen/dimen_15"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    style="@style/CheYiPai.TextAppearance.MiddleSmall"
+                    android:textColor="@color/common_text_red"
+                    android:drawablePadding="@dimen/dimen_4"
+                    android:drawableLeft="@mipmap/camera_red"
+                    android:text="@string/take_photo_test"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <include layout="@layout/hair_detail_layout"></include>
+            <include layout="@layout/hair_info_layout"></include>
+            <LinearLayout
+                android:id="@+id/ll_tab"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:background="@color/smokeWhite"
+                android:layout_height="match_parent">
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_gravity="bottom|right"
+        android:layout_width="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_15"
+        android:layout_marginRight="@dimen/dimen_15"
+        android:layout_height="wrap_content">
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:src="@mipmap/hair_circle_bg"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:src="@mipmap/hair_use"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content" />
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_20"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:src="@mipmap/hair_circle_bg"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:src="@mipmap/hair_zan"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content" />
+        </FrameLayout>
+    </LinearLayout>
+</FrameLayout>

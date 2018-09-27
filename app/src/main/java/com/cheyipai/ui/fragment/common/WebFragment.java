@@ -9,7 +9,9 @@ import android.webkit.WebViewClient;
 
 import com.cheyipai.corec.activity.AbsBaseFragment;
 import com.cheyipai.ui.R;
+import com.cheyipai.ui.commons.EventCode;
 import com.cheyipai.ui.ui.car.commons.WebViewShowActivity;
+import com.ypy.eventbus.EventBus;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -19,6 +21,11 @@ import butterknife.InjectView;
  */
 public class WebFragment extends AbsBaseFragment {
 
+    private int code;
+    public WebFragment(int code){
+        this.code = code;
+    }
+
     @InjectView(R.id.common_webView)
     WebView webView;
 
@@ -26,17 +33,23 @@ public class WebFragment extends AbsBaseFragment {
     public void setFragmentType(int fragmentType) {
 
     }
-
     @Override
     protected void onNoNetworkClick(View view) {
         super.onNoNetworkClick(view);
-        ((WebViewShowActivity) this.getActivity()).loadUrl();
+
     }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        EventBus.getDefault().post(code);
+    }
 
     public void loadWebview(String url) {
         webView.loadUrl(url);
     }
+
+
 
 
     public void setSettings() {
@@ -72,6 +85,5 @@ public class WebFragment extends AbsBaseFragment {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         setSettings();
-        ((WebViewShowActivity) this.getActivity()).loadUrl();
     }
 }

@@ -1,0 +1,70 @@
+<TabHost
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:circleprogress="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tab_host"
+    android:layout_width="fill_parent"
+    android:layout_marginTop="@dimen/dimen_30"
+    android:layout_marginLeft="@dimen/dimen_15"
+    android:layout_marginRight="@dimen/dimen_15"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:layout_height="fill_parent" >
+
+
+    <LinearLayout
+        android:id="@+id/console_line_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <RadioGroup
+            android:id="@+id/main_tab_group"
+            android:background="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <RadioButton
+                android:id="@+id/rb_tab_hair_intro"
+                android:padding="10dp"
+                android:drawablePadding="@dimen/dimen_10"
+                android:gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:textSize="16sp"
+                android:drawableLeft="@drawable/hair_intro_selector"
+                android:button="@null"
+                style="@style/hair_tab_panel"
+                android:text="@string/hair_intro" />
+            <View
+                android:layout_width="@dimen/dimen_4"
+                android:layout_marginLeft="@dimen/dimen_26"
+                android:layout_marginRight="@dimen/dimen_26"
+                android:layout_marginTop="@dimen/dimen_10"
+                android:layout_marginBottom="@dimen/dimen_10"
+                android:background="@color/hair_tab_gay"
+                android:layout_height="match_parent"></View>
+            <RadioButton
+                android:id="@+id/rb_tab_hair_service"
+                android:padding="10dp"
+                android:drawablePadding="@dimen/dimen_10"
+                android:gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableLeft="@drawable/hair_service_selector"
+                android:textSize="16sp"
+                style="@style/hair_tab_panel"
+                android:text="@string/hair_service" />
+
+        </RadioGroup>
+    </LinearLayout>
+
+
+
+</TabHost>

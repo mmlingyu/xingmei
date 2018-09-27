@@ -3,9 +3,13 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-
+    <color name="background_white">#FFFFFF</color>
+    <color name="gray_999999">#999999</color>
     <!-- 车辆录入灰色 -->
     <color name="carentry_gray">#bebebe</color>
     <!-- 车辆录入绿色 -->
-    <color name="carentry_green">#22c8ba</color>
+    <color name="hair_tab_gay">#e8e8e8</color>
+
+    <color name="common_text_red">#ffec4ce6</color>
+    <color name="text2">#333333</color>
 </resources>

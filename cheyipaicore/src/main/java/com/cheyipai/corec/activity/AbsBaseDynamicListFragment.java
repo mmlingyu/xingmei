@@ -136,6 +136,7 @@ public abstract class AbsBaseDynamicListFragment extends AbsBaseFragment impleme
             onInitFooter(footerView);
             listView.addFooterView(footerView);
         }
+        listView.setDividerHeight(30);
         mListAdapter = new ListAdapter();
         listView.setAdapter(mListAdapter);
         init(savedInstanceState);

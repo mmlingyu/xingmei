@@ -1,19 +1,33 @@
 package com.cheyipai.ui;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.cheyipai.corec.activity.AbsBaseActivity;
 import com.cheyipai.corec.modules.config.GlobalConfigHelper;
 import com.cheyipai.ui.fragment.BannerFragment;
 import com.cheyipai.ui.utils.IntentUtils;
+import com.cheyipai.ui.view.ScrollListView;
 import com.ypy.eventbus.EventBus;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -39,6 +53,18 @@ public class HomeActivity extends AbsBaseActivity {
     @InjectView(R.id.man_tv)
     protected TextView all_tv;
 
+    @InjectView(R.id.face_tv)
+    protected TextView face_tv;
+    protected TextView cancel_tv;
+    protected TextView sure_tv;
+    @InjectView(R.id.face_ll)
+    protected LinearLayout face_ll;
+
+    private Dialog faceDialog;
+    private ScrollListView faceListView;
+
+
+    private List<String> faceDataList;
     /**
      * 设置布局文件
      * @return
@@ -49,26 +75,86 @@ public class HomeActivity extends AbsBaseActivity {
         return R.layout.home_activity;
     }
 
+    private void initDialog() {
+        if (faceDialog == null) {
+            faceDialog = new Dialog(this, R.style.time_dialog);
+            faceDialog.setCancelable(false);
+            faceDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            faceDialog.setContentView(R.layout.index_face_window);
+            Window window = faceDialog.getWindow();
+            window.setGravity(Gravity.BOTTOM);
+            faceDialog.setCanceledOnTouchOutside(true);
+            WindowManager manager = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+            DisplayMetrics dm = new DisplayMetrics();
+            manager.getDefaultDisplay().getMetrics(dm);
+            WindowManager.LayoutParams lp = window.getAttributes();
+            lp.width = dm.widthPixels;
+            window.setAttributes(lp);
+            faceDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialogInterface) {
+                    face_tv.setText(faceListView.getSelect());
+                }
+            });
+        }
+    }
 
     @Override
     protected void init() {
 
         fragmentManager = this.getSupportFragmentManager();
-        ButterKnife.inject(this);
-
         mBannerFragment = (BannerFragment) fragmentManager.findFragmentById(R.id.banner_fragment);
 
        // startLocation();
         openEventBus();
         checkVersion();
+        initDialog();
+        initView();
+        ButterKnife.inject(this);
         openAppStatitcs();
        //TextViewh all_tv.setText(getRadiusGradientSpan("全部",0xFFec4ce6,0xfffa4a6f));
     }
 
+    private void initView(){
+        faceDataList = new ArrayList<String>();
+        faceDataList.add("圆脸");
+        faceDataList.add("瓜子脸");
+        faceDataList.add("方脸");
+        faceDataList.add("椭圆脸");
+
+        faceListView = faceDialog.findViewById(R.id.face_lv);
+        cancel_tv = faceDialog.findViewById(R.id.cancel_tv);
+        sure_tv = faceDialog.findViewById(R.id.tv_sure);
+        sure_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                faceDialog.dismiss();
+                face_tv.setText(faceListView.getSelect());
+            }
+        });
+        cancel_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                faceDialog.dismiss();
+            }
+        });
+        faceListView.setData(faceDataList);
+        faceListView.setOnSelectListener(new ScrollListView.onSelectListener() {
+            @Override
+            public void onSelect(String text) {
+                Log.d("----","face = "+text);
+               // faceDialog.dismiss();
+                //face_tv.setText(text);
+            }
+        });
+    }
     private void openAppStatitcs(){
 
     }
-
+    @OnClick(R.id.face_ll)
+    public void onFaceClick(View view){
+        faceDialog.show();
+    }
     /**
      * check app version
      */

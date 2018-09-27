@@ -1,7 +1,12 @@
 package com.cheyipai.ui.utils;
 ;
 import android.content.Context;
+import android.graphics.Color;
+import android.view.View;
 import android.widget.Toast;
+
+import com.cheyipai.ui.CheyipaiApplication;
+import com.cheyipai.ui.view.ShadowDrawable;
 
 
 /**
@@ -31,4 +36,14 @@ public class DialogUtils {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
 
+    public static void setShapeDrawable(View view){
+        ShadowDrawable.setShadowDrawable(view, new int[] {
+                        Color.parseColor("#ffffff")}, dpToPx(5),
+                Color.parseColor("#99999999"), dpToPx(5), dpToPx(2), dpToPx(2));
+
+    }
+
+    private static int dpToPx(int dp) {
+        return (int) (CheyipaiApplication.getApplication().getResources().getSystem().getDisplayMetrics().density * dp + 0.5f);
+    }
 }

@@ -10,10 +10,6 @@ import com.cheyipai.ui.bean.CarPhoto;
  */
 public class CarPhotoAdapterItem extends AbsAdapterItem<CarPhoto> {
 
-    public CarPhotoAdapterItem(View itemView) {
-        super(itemView);
-    }
-
 
 
     @Override

@@ -20,6 +20,7 @@ allprojects {
         repositories {
             maven { url 'http://192.168.104.104:8081/nexus/content/repositories/cyp-android-releases/' }
             maven { url 'http://192.168.104.104:8081/nexus/content/repositories/cyp-android-snapshots/' }
+            maven { url 'https://jitpack.io' }
         }
     }
 }
