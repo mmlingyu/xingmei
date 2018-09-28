@@ -5,7 +5,7 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <include layout="@layout/index_common_head" />
+    <include layout="@layout/hair_common_head"></include>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,14 +16,7 @@
             android:layout_height="wrap_content"
             android:gravity="top|center_horizontal"
             android:orientation="vertical">
-            <fragment
-                android:id="@+id/banner_fragment"
-                android:name="com.cheyipai.ui.fragment.BannerFragment"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_120"
-                android:layout_marginBottom="@dimen/dimen_20"
-                android:layout_gravity="top|center_horizontal" />
-                <include layout="@layout/index_panel"></include>
+            <include layout="@layout/hair_store_panel" ></include>
             <fragment
                 android:id="@+id/hair_fragment"
                 android:name="com.cheyipai.ui.fragment.HairListFragment"
@@ -32,7 +25,7 @@
                 android:layout_marginLeft="@dimen/dimen_10"
                 android:layout_marginRight="@dimen/dimen_10"
                 android:layout_marginBottom="@dimen/dimen_10"
-               />
+                />
         </LinearLayout>
 
     </ScrollView>

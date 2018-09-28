@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -18,14 +17,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.android.arouter.launcher.ARouter;
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cheyipai.corec.activity.AbsBaseActivity;
 import com.cheyipai.corec.modules.config.GlobalConfigHelper;
 import com.cheyipai.ui.commons.Path;
 import com.cheyipai.ui.fragment.BannerFragment;
-import com.cheyipai.ui.utils.IntentUtils;
 import com.cheyipai.ui.view.ScrollListView;
-import com.ypy.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +34,8 @@ import butterknife.OnClick;
 /**
  * 首页
  */
-public class HomeActivity extends AbsBaseActivity {
+@Route(path = Path.HAIR_LIST)
+public class HairStoreActivity extends AbsBaseActivity {
 
     private long mExitTime;
     public static final int INDEX_HOT_BRAND_TYPE = 1;//热门品牌
@@ -47,12 +45,9 @@ public class HomeActivity extends AbsBaseActivity {
     private static double mCurrentLat,mCurrentLng;
     private FragmentManager fragmentManager;
 
-    private BannerFragment mBannerFragment;
-
-    @InjectView(R.id.hair_store_tv)
-    protected TextView hair_store_tv;
     @InjectView(R.id.man_tv)
     protected TextView all_tv;
+
 
     @InjectView(R.id.face_tv)
     protected TextView face_tv;
@@ -60,7 +55,8 @@ public class HomeActivity extends AbsBaseActivity {
     protected TextView sure_tv;
     @InjectView(R.id.face_ll)
     protected LinearLayout face_ll;
-
+    @InjectView(R.id.title)
+    protected TextView title;
     private Dialog faceDialog;
     private ScrollListView faceListView;
 
@@ -73,7 +69,7 @@ public class HomeActivity extends AbsBaseActivity {
     @Override
     protected int getLayoutID() {
 
-        return R.layout.home_activity;
+        return R.layout.hair_list_activity;
     }
 
     private void initDialog() {
@@ -100,18 +96,23 @@ public class HomeActivity extends AbsBaseActivity {
         }
     }
 
+    @OnClick(R.id.back_iv)
+    public void back(View view){
+        this.finish();
+    }
+
     @Override
     protected void init() {
 
         fragmentManager = this.getSupportFragmentManager();
-        mBannerFragment = (BannerFragment) fragmentManager.findFragmentById(R.id.banner_fragment);
 
        // startLocation();
         openEventBus();
         checkVersion();
         initDialog();
-        initView();
         ButterKnife.inject(this);
+        initView();
+
         openAppStatitcs();
        //TextViewh all_tv.setText(getRadiusGradientSpan("全部",0xFFec4ce6,0xfffa4a6f));
     }
@@ -122,7 +123,8 @@ public class HomeActivity extends AbsBaseActivity {
         faceDataList.add("瓜子脸");
         faceDataList.add("方脸");
         faceDataList.add("椭圆脸");
-
+        //back_iv.setVisibility(View.GONE);
+        title.setText("发型库");
         faceListView = faceDialog.findViewById(R.id.face_lv);
         cancel_tv = faceDialog.findViewById(R.id.cancel_tv);
         sure_tv = faceDialog.findViewById(R.id.tv_sure);
@@ -179,10 +181,6 @@ public class HomeActivity extends AbsBaseActivity {
     }
 
 
-    @OnClick(R.id.hair_store_tv)
-    public void showStore(View view){
-        IntentUtils.aRouterIntent(this, Path.HAIR_LIST);
-    }
 
     /**
      * set location city
@@ -210,9 +208,7 @@ public class HomeActivity extends AbsBaseActivity {
      */
     private void reflush(boolean networkConnected){
         if(networkConnected){
-            if(mBannerFragment!=null){
 
-            }
         }
     }
 
@@ -232,13 +228,8 @@ public class HomeActivity extends AbsBaseActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if ((System.currentTimeMillis() - mExitTime) > 2000) {
-                Toast.makeText(this, "再按一次返回桌面", Toast.LENGTH_SHORT).show();
-                mExitTime = System.currentTimeMillis();
 
-            } else {
                 this.finish();
-            }
             return true;
         }
         return super.onKeyDown(keyCode, event);

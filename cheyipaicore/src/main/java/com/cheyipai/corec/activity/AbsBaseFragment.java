@@ -13,6 +13,7 @@ import android.widget.ViewAnimator;
 import com.cheyipai.corec.R;
 import com.cheyipai.corec.account.AbsAccount;
 import com.cheyipai.corec.base.api.ResponseData;
+import com.cheyipai.corec.components.dialog.XMLoadingDialogs;
 import com.cheyipai.corec.modules.app.BaseApplication;
 import com.cheyipai.corec.components.BaseHolder;
 import com.cheyipai.corec.components.LoadingViewAnim;
@@ -26,7 +27,7 @@ import com.ypy.eventbus.EventBus;
 /**
  * Created by daincly on 2014/11/14.
  */
-public abstract class AbsBaseFragment extends Fragment {
+public abstract class   AbsBaseFragment extends Fragment {
     Bundle savedState;
     private static final String TAG = AbsBaseFragment.class.getSimpleName();
     //fragment 展示状态
@@ -67,10 +68,10 @@ public abstract class AbsBaseFragment extends Fragment {
         return mFragmentStatus;
     }
 
-    public LoadingDialogs loadingDialogs;
+    public XMLoadingDialogs loadingDialogs;
 
     public void initLoadingDialog() {
-        loadingDialogs = new LoadingDialogs(getActivity());
+        loadingDialogs = new XMLoadingDialogs(getActivity());
     }
 
     /**

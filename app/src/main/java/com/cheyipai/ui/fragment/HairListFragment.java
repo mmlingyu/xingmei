@@ -70,6 +70,10 @@ public class HairListFragment extends AbsBaseDynamicListFragment {
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         super.onItemClick(parent, view, position, id);
+        /*Intent intent = new Intent();
+        intent.setClass(this.getActivity(),HairActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        IntentUtil.startIntent(this.getActivity(),intent);*/
         IntentUtils.aRouterIntent(this.getActivity(), Path.HAIR);
     }
 

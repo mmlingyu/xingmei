@@ -33,7 +33,7 @@ public class WebFragment extends AbsBaseFragment {
     @Override
     protected void onNoNetworkClick(View view) {
         super.onNoNetworkClick(view);
-
+        ((WebViewActivity) this.getActivity()).loadUrl();
     }
 
 

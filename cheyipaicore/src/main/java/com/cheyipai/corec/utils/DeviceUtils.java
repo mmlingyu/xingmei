@@ -16,7 +16,9 @@ public class DeviceUtils {
                 .getSystemService(Context.WINDOW_SERVICE);
 		return wm.getDefaultDisplay().getWidth();
 	}
-
+    public static int dpToPx(int dp) {
+        return (int) (BaseApplication.getApplication().getResources().getSystem().getDisplayMetrics().density * dp + 0.5f);
+    }
 	/**
 	 * 得到设备屏幕的高度
 	 */

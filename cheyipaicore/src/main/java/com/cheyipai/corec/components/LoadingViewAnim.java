@@ -38,7 +38,7 @@ public class LoadingViewAnim extends View {
      * 小易圆圈和小易图标
      */
     private Bitmap mLoadingCircle;
-    private Bitmap mLoadingXiaoYi;
+    //private Bitmap mLoadingXiaoYi;
     /**
      * 画布旋转弧度
      */
@@ -57,7 +57,7 @@ public class LoadingViewAnim extends View {
      */
     private void initBitMap() {
         mLoadingCircle = readBitMap(getContext(), R.drawable.loading_circle);
-        mLoadingXiaoYi = readBitMap(getContext(), R.drawable.loading_xiaoyi);
+        //mLoadingXiaoYi = readBitMap(getContext(), R.drawable.loading_xiaoyi);
     }
 
     public static Bitmap readBitMap(Context context, int resId) {
@@ -79,7 +79,7 @@ public class LoadingViewAnim extends View {
         canvas.drawBitmap(mLoadingCircle, mWidth - mLoadingCircle.getWidth() / 2, mHeight - mLoadingCircle.getHeight() / 2, null);
         canvas.restore();
         getBitmapNewLocation();
-        canvas.drawBitmap(mLoadingXiaoYi, newBitmapX, newBitmapY, null);
+       // canvas.drawBitmap(mLoadingXiaoYi, newBitmapX, newBitmapY, null);
     }
 
     /**
@@ -89,9 +89,9 @@ public class LoadingViewAnim extends View {
         mWidth = getWidth() / 2;
         mHeight = getHeight() / 2;
         //弹跳的初始参考点
-        highY = mHeight - mLoadingXiaoYi.getHeight() / 2;
+        //highY = mHeight - mLoadingXiaoYi.getHeight() / 2;
         //小易初始的位置
-        newBitmapX = mWidth - mLoadingXiaoYi.getWidth() / 2;
+       // newBitmapX = mWidth - mLoadingXiaoYi.getWidth() / 2;
         newBitmapY = highY;
     }
 

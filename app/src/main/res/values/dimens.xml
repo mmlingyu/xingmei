@@ -6,4 +6,5 @@
     <dimen name="default_circle_view_size">200dp</dimen>
     <dimen name="default_activity_padding">16dp</dimen>
     <dimen name="default_padding">8dp</dimen>
+    <dimen name="hair_item_margin">10dip</dimen>
 </resources>

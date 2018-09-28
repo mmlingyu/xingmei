@@ -16,4 +16,5 @@
     <string name="take_photo_test">拍照查看理发效果</string>
     <string name="hair_intro">发型介绍</string>
     <string name="hair_service">发型打理</string>
+    <string name="recommond_hair">推荐发型</string>
 </resources>

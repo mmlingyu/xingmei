@@ -43,7 +43,7 @@ public class DialogUtils {
 
     }
 
-    private static int dpToPx(int dp) {
+    public static int dpToPx(int dp) {
         return (int) (CheyipaiApplication.getApplication().getResources().getSystem().getDisplayMetrics().density * dp + 0.5f);
     }
 }

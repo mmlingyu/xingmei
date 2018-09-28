@@ -11,6 +11,7 @@ import android.widget.ListView;
 import com.cheyipai.corec.R;
 import com.cheyipai.corec.components.newpullview.PullToRefreshListView;
 import com.cheyipai.corec.log.L;
+import com.cheyipai.corec.utils.DeviceUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -136,7 +137,7 @@ public abstract class AbsBaseDynamicListFragment extends AbsBaseFragment impleme
             onInitFooter(footerView);
             listView.addFooterView(footerView);
         }
-        listView.setDividerHeight(30);
+        listView.setDividerHeight(DeviceUtils.dpToPx(18));
         mListAdapter = new ListAdapter();
         listView.setAdapter(mListAdapter);
         init(savedInstanceState);

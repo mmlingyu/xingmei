@@ -45,7 +45,7 @@ public class HairAdapterItem extends AbsAdapterItem<Hair> {
     @Override
     public void init(View contentView) {
         ButterKnife.inject(this, contentView);
-        DialogUtils.setShapeDrawable(contentView);
+       // DialogUtils.setShapeDrawable(contentView);
 
     }
 

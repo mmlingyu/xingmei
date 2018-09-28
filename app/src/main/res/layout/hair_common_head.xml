@@ -9,6 +9,9 @@
         android:id="@+id/back_iv"
         android:layout_width="wrap_content"
         android:layout_centerVertical="true"
+        android:paddingTop="@dimen/dimen_8"
+        android:paddingBottom="@dimen/dimen_8"
+        android:paddingRight="@dimen/dimen_15"
         android:paddingLeft="@dimen/dimen_15"
         android:src="@mipmap/common_back"
         android:layout_height="wrap_content" />

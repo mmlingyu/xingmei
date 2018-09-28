@@ -32,9 +32,11 @@ import com.cheyipai.ui.fragment.BannerFragment;
 import com.cheyipai.ui.fragment.common.WebFragment;
 import com.cheyipai.ui.utils.DialogUtils;
 import com.cheyipai.ui.view.ScrollListView;
+import com.cheyipai.ui.view.SelectPicPopupWindow;
 import com.ypy.eventbus.EventBus;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -50,8 +52,10 @@ public class HairActivity extends AbsBaseActivity {
     private Dialog faceDialog;
     @InjectView(R.id.hair_ll)
     protected RelativeLayout hair_ll;
-
+    private SelectPicPopupWindow picPopupWindow;
     public static WebFragment[] fragments;
+    private static final String intro="https://mp.weixin.qq.com/s?__biz=MzIyNzM2ODIyMQ==&mid=2247483695&idx=1&sn=ace240e37f3d9be9e485364791e2635e&mpshare=1&scene=1&srcid=0928dmYEHuGEZcOa12GvEdgA&pass_ticket=4SbZtPID2TQWhKPSJp3MPlQ3GaENP%2F%2Br2foKqDmc6JVLkaJC%2BZ2qi5GhZuxT8eYi#rd";
+    private static final String service="https://mp.weixin.qq.com/s?__biz=MzIxMDkzNjU3Mw==&mid=2247483751&idx=1&sn=d6f72d65e56a8c7e44e8f691c0f3ebcb&chksm=975db6f5a02a3fe3633bcaee03833c79af19e307f3b3191efda75569d2434c616c9bffd63f27&mpshare=1&scene=1&srcid=09280lYNuqyeSVcZSBHvv78D&pass_ticket=4SbZtPID2TQWhKPSJp3MPlQ3GaENP%2F%2Br2foKqDmc6JVLkaJC%2BZ2qi5GhZuxT8eYi#rd";
     /**
      * 设置布局文件
      * @return
@@ -71,8 +75,8 @@ public class HairActivity extends AbsBaseActivity {
     public void setfragment()
     {
         fragments = new WebFragment[2];
-        fragments[0]= new WebFragment(EventCode.WEB_100010);
-        fragments[1]= new WebFragment(EventCode.WEB_100011);
+        fragments[0]=  WebFragment.newInstance(EventCode.WEB_100010);
+        fragments[1]=  WebFragment.newInstance(EventCode.WEB_100011);
         fragmentManager.beginTransaction().replace(R.id.ll_tab,fragments[0]).commit();
         fragmentManager.executePendingTransactions();
 
@@ -85,35 +89,14 @@ public class HairActivity extends AbsBaseActivity {
         setfragment();
     }
 
-    private void initDialog() {
-        if (faceDialog == null) {
-            faceDialog = new Dialog(this, R.style.time_dialog);
-            faceDialog.setCancelable(false);
-            faceDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            faceDialog.setContentView(R.layout.index_face_window);
-            Window window = faceDialog.getWindow();
-            window.setGravity(Gravity.BOTTOM);
-            faceDialog.setCanceledOnTouchOutside(true);
-            WindowManager manager = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
-            DisplayMetrics dm = new DisplayMetrics();
-            manager.getDefaultDisplay().getMetrics(dm);
-            WindowManager.LayoutParams lp = window.getAttributes();
-            lp.width = dm.widthPixels;
-            window.setAttributes(lp);
-            faceDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialogInterface) {
-                }
-            });
-        }
-    }
+
 
     @Override
     protected void init() {
         fragmentManager = this.getSupportFragmentManager();
        // startLocation();
         openEventBus();
-        initDialog();
+       // initDialog();
         ButterKnife.inject(this);
         initView();
 
@@ -129,13 +112,22 @@ public class HairActivity extends AbsBaseActivity {
     }
 
 
+
+    @OnClick(R.id.use_ll)
+    public void onUserClick(View view){
+        if(picPopupWindow==null)
+        picPopupWindow = new SelectPicPopupWindow(this,null, Arrays.asList("清新自然风","甜美淑女风","职场女神风","清新自然风","甜美淑女风","职场女神风"));
+        picPopupWindow.showAtLocation(this.findViewById(R.id.title), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+        //popupView.startAnimation(animation);
+    }
+
     public void onEvent(Integer code){
         if(code == EventCode.WEB_100010){
             fragmentManager.beginTransaction().replace(R.id.ll_tab,fragments[0]).commit();
-            fragments[0].loadWebview("http://www.baidu.com");
+            fragments[0].loadWebview(intro);
         }else if(code == EventCode.WEB_100011){
             fragmentManager.beginTransaction().replace(R.id.ll_tab,fragments[1]).commit();
-            fragments[1].loadWebview("http://www.sogou.com");
+            fragments[1].loadWebview(service);
         }
     }
 
@@ -154,7 +146,8 @@ public class HairActivity extends AbsBaseActivity {
 
         fragmentManager.beginTransaction().replace(R.id.ll_tab,fragments[0]).commit();
         fragmentManager.executePendingTransactions();
-        fragments[0].loadWebview("http://www.baidu.com");
+        if(!fragments[0].isLoad())
+        fragments[0].loadWebview(intro);
 
     }
     @OnClick(R.id.rb_tab_hair_service)
@@ -162,19 +155,13 @@ public class HairActivity extends AbsBaseActivity {
 
         fragmentManager.beginTransaction().replace(R.id.ll_tab,fragments[1]).commit();
         fragmentManager.executePendingTransactions();
-        fragments[1].loadWebview("http://www.sogou.com");
+        if(!fragments[1].isLoad())
+        fragments[1].loadWebview(service);
     }
-
 
     protected void openEventBus() {
         EventBus.getDefault().register(this);
     }
-
-
-
-
-
-
 
 
 
@@ -197,24 +184,7 @@ public class HairActivity extends AbsBaseActivity {
     }
 
 
-    public static boolean locationStatus = true;
-    @Override
-    protected void onResume() {
-       /* if(window!=null){
-            window.requestGetCityApi();
-        }*/
 
-
-        super.onResume();
-
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-    }
 
 
 }

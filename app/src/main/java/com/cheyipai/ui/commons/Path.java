@@ -7,4 +7,5 @@ package com.cheyipai.ui.commons;
 public class Path {
 
     public static final String HAIR = "/hair/detail";
+    public static final String HAIR_LIST= "/hair/list";
 }

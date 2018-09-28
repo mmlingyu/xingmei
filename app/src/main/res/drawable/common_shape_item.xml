@@ -5,7 +5,7 @@
             <item android:left="1dp" android:top="1dp">
                 <shape>
                     <solid android:color="@color/smokeWhite" />
-                    <corners android:radius="18dip"/>
+                    <corners android:radius="13dip"/>
                 </shape>
             </item>
         </layer-list>
@@ -14,7 +14,7 @@
         <layer-list> <!-- SHADOW LAYER -->
             <item android:left="1dp" android:top="1dp">
                 <shape> <solid android:color="#66000000" />
-                    <corners android:radius="18dip"/>
+                    <corners android:radius="10dip"/>
                    <!-- <gradient android:startColor="#66000000" android:endColor="@color/smokeWhite"></gradient>-->
                 </shape>
             </item> <!-- CONTENT LAYER -->
@@ -25,8 +25,8 @@
                         android:width="0.2dp"
                         android:color="@color/carentry_gray"
                         />
-                    <solid android:color="#ffffff" />
-                    <corners android:radius="18dip"/>
+                    <solid android:color="@color/hair_more_bg_paper" />
+                    <corners android:radius="13dip"/>
                 </shape>
             </item>
         </layer-list>
