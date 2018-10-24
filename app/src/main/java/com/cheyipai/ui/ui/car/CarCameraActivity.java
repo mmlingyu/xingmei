@@ -19,8 +19,8 @@ import com.cheyipai.ui.R;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 public class CarCameraActivity extends AbsBaseActivity implements View.OnClickListener {
     // camera 类
@@ -35,18 +35,18 @@ public class CarCameraActivity extends AbsBaseActivity implements View.OnClickLi
 
     @Override
     protected void init() {
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         btn2.setOnClickListener(this);
         btn1.setOnClickListener(this);
     }
 
     // 按钮 布局等定义，不作赘述
-    @InjectView(R.id.open)
+    @BindView(R.id.open)
     Button btn1;
-    @InjectView(R.id.take)
+    @BindView(R.id.take)
     Button btn2;
 
-    @InjectView(R.id.cameraView)
+    @BindView(R.id.cameraView)
     LinearLayout l ;
     // 回调用的picture，实现里边的onPictureTaken方法，其中byte[]数组即为照相后获取到的图片信息
     private Camera.PictureCallback picture = new Camera.PictureCallback() {

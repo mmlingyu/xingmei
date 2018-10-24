@@ -5,18 +5,20 @@ import android.net.http.SslError;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.SslErrorHandler;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.cheyipai.corec.activity.AbsBaseFragment;
+import com.cheyipai.ui.CheyipaiApplication;
 import com.cheyipai.ui.R;
 import com.cheyipai.ui.commons.EventCode;
 import com.cheyipai.ui.ui.car.commons.WebViewShowActivity;
 import com.ypy.eventbus.EventBus;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by 景涛 on 2015/9/18.
@@ -36,7 +38,7 @@ public class WebFragment extends AbsBaseFragment {
         return fragment;
     }
 
-    @InjectView(R.id.common_webView)
+    @BindView(R.id.common_webView)
     WebView webView;
 
     public boolean isLoad() {
@@ -65,21 +67,30 @@ public class WebFragment extends AbsBaseFragment {
         EventBus.getDefault().post(code);
     }
 
-    public void loadWebview(String url) {
+    public void loadWebview(final String url) {
         webView.clearHistory();
-        webView.loadUrl(url);
+
+        webView.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                webView.loadUrl(url);
+            }
+        }, 500);
+
     }
 
 
 
 
     public void setSettings() {
-
+        webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        webView.setBackgroundColor(getResources().getColor(R.color.white_half_transparent));
         webView.setWebViewClient(new WebViewClient() {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                return false;
+              return  false;
             }
 
             @Override
@@ -99,7 +110,7 @@ public class WebFragment extends AbsBaseFragment {
                 handler.proceed();  // 接受所有网站的证书
                 super.onReceivedSslError(view, handler, error);
             }
-            });
+        });
     }
 
     @Override
@@ -109,13 +120,26 @@ public class WebFragment extends AbsBaseFragment {
 
     @Override
     protected void init(Bundle savedInstanceState, View contentView) {
-        ButterKnife.inject(this, contentView);
+        ButterKnife.bind(this, contentView);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setAllowFileAccess(true);
-        webSettings.setBlockNetworkImage(false);//解决图片不显示
+        webSettings.setAllowFileAccessFromFileURLs(true);
+        webSettings.setAllowUniversalAccessFromFileURLs(true);
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setDatabaseEnabled(true);
+        webSettings.setUseWideViewPort(true);
+        webSettings .setLoadWithOverviewMode(true);
+        webSettings.setLoadsImagesAutomatically(true);
+        webSettings.setAppCacheEnabled(true);
+        webSettings.setAppCacheMaxSize(1024*1024*68);
+        String appCachePath=CheyipaiApplication.getInstance().getCacheDir().getAbsolutePath();
+        webSettings.setAppCachePath(appCachePath);
+
+
+        webSettings.setBlockNetworkImage(true);//解决图片不显示
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+            //webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
         setSettings();
     }

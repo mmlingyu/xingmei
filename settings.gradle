@@ -1,1 +1,1 @@
-include ':app', ':cheyipaicore'
+include ':app', ':cheyipaicore',':disk-cache'

@@ -146,7 +146,7 @@ public abstract class AbsBannerFragment extends AbsBaseFragment implements ViewP
         pointLinearLayout.removeAllViews();
         if (mPagerViewList.size() <= 1) return;
         for (int i = 0; i < mPagerViewList.size(); i++) {
-            ImageView point = new ImageView(CheyipaiApplication.getApplication());
+            ImageView point = new ImageView(CheyipaiApplication.getInstance());
             point.setImageDrawable(getResources().getDrawable(R.drawable.index_banner_point_selector));
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             layoutParams.setMargins(10, 2, 10, 2);

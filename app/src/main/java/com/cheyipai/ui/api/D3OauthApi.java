@@ -21,6 +21,7 @@ import com.cheyipai.ui.bean.Oauth;
 import com.cheyipai.ui.bean.OauthCallback;
 import com.cheyipai.ui.bean.OauthPlayer;
 import com.cheyipai.ui.bean.Status;
+import com.cheyipai.ui.utils.ZipUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -88,6 +89,20 @@ public class D3OauthApi {
         this.weakcontext = new WeakReference<Context>(context);
     }
 
+    public void getObjOfBlendshapes(final Oauth oauth,final String code,  final DownF3d downF3d, final String filepath) {
+        try {
+            new Thread() {
+                @Override
+                public void run() {
+                    DownloadObj(oauth, "https://api.avatarsdk.com/avatars/" + code + "/blendshapes?fmt=fbx", filepath, downF3d);
+                }
+            }.start();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    };
+
     public static String get(String url,Oauth oauth) throws IOException {
         Request request = new Request.Builder()
                 .url(url)
@@ -101,6 +116,7 @@ public class D3OauthApi {
             throw new IOException("Unexpected code " + response);
         }
     }
+
     public static String post(String url, String json,String key,String value) throws IOException {
         RequestBody body = RequestBody.create(JSON, json);
         Request request = new Request.Builder()
@@ -143,7 +159,7 @@ public class D3OauthApi {
     }
 
     public void createPlayer(final String playerName,final Oauth oauth,final OauthCallback oauthCallback){
-            new Thread() {
+        new Thread() {
             @Override
             public void run() {
                 String res = null;
@@ -153,12 +169,12 @@ public class D3OauthApi {
                     oauth.setPlayer(palyer.getCode());
                     SharedPrefersUtils.put(weakcontext.get(),"player",palyer.getCode());
                     ((Activity)weakcontext.get()).runOnUiThread(new Runnable() {
-                                                                    public void run() {
-                                                                            oauthCallback.onOauthSucc(oauth);
-                                                                            Log.d("api---------", "player code -->" + palyer.getCode());
+                        public void run() {
+                            oauthCallback.onOauthSucc(oauth);
+                            Log.d("api---------", "player code -->" + palyer.getCode());
 
-                                                                    }
-                                                                });
+                        }
+                    });
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -198,6 +214,40 @@ public class D3OauthApi {
 
         return true;
     }
+
+    public  boolean DownloadObj(Oauth oauth, final String uri, final String filePath, final DownF3d downF3d) {
+        Request request = new Request.Builder().url(uri.toString()).header("Authorization",oauth.getToken()).header("X-PlayerUID",oauth.getPlayer()).build();
+
+        try {
+            Response response = client.newCall(request).execute();
+            if (!response.isSuccessful()) {
+                return false;
+            }
+
+            ResponseBody body = response.body();
+            long contentLength = body.contentLength();
+            BufferedSource source = body.source();
+            File file = new File(filePath);
+            BufferedSink sink = Okio.buffer(Okio.sink(file));
+            sink.writeAll(source);
+            sink.flush();
+            ZipUtils.UnZipFolder(filePath,Environment.getExternalStorageDirectory().getAbsolutePath(),"model.fbx");
+            ((Activity)weakcontext.get()).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    downF3d.onDown(null);
+                }});
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return true;
+    }
+
 
     public void get(final Oauth oauth, final String url, final DownF3d downF3d, final String filepath){
         try {
@@ -240,6 +290,35 @@ public class D3OauthApi {
         }
     }
 
+    public void getFaceObj(final Oauth oauth, final F3dStatus f3dStatus, final F3dCallback f3dCallback){
+        try {
+            new Thread() {
+                @Override
+                public void run() {
+                    while (true) {
+                        String res = null;
+                        try {
+                            res = get(f3dStatus.getUrl(), oauth);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        final F3d status = new Gson().fromJson(res, F3d.class);
+                        if (status.getStatus().equals("Completed")) {
+                            ((Activity)weakcontext.get()).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    f3dCallback.onF3dSucc(status);
+                                }});
+                            break;
+                        }
+                    }
+                }}.start();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void uploadUserFace(final String faceName, final Oauth oauth, final File file, final F3dUploadCallback f3dUploadCallback){
         new Thread() {
             @Override
@@ -249,7 +328,7 @@ public class D3OauthApi {
                 param.append("name="+faceName).append("&pipeline=animated_face");*/
                 final Map<String,String> stringMap = new HashMap<String, String>();
                 stringMap.put("name",faceName);
-                stringMap.put("pipeline","head");
+                stringMap.put("pipeline","animated_face");//head 带原始头发 animated_face 只有光头
                 stringMap.put("pipeline_subtype","base/legacy");
                 ((Activity)weakcontext.get()).runOnUiThread(new Runnable() {
                     @Override

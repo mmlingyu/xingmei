@@ -12,8 +12,8 @@ import com.cheyipai.corec.activity.AbsBaseActivity;
 import com.cheyipai.corec.components.SlideBar;
 import com.cheyipai.ui.R;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * SlideBar Demo
@@ -25,10 +25,10 @@ public class SlideBarDemoActivity extends AbsBaseActivity {
 
     public String[] data = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
 
-    @InjectView(R.id.demo_sb)
+    @BindView(R.id.demo_sb)
     SlideBar slideBar;
 
-    @InjectView(R.id.demo_slide_result_tv)
+    @BindView(R.id.demo_slide_result_tv)
     TextView tvSlideResult;
 
     @Override
@@ -38,7 +38,7 @@ public class SlideBarDemoActivity extends AbsBaseActivity {
 
     @Override
     protected void init() {
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         Paint normalTextPaint = new Paint();
         normalTextPaint.setColor(getResources().getColor(com.cheyipai.corec.R.color.oilPriceBlue));
         normalTextPaint.setTypeface(Typeface.DEFAULT_BOLD);
@@ -82,6 +82,6 @@ public class SlideBarDemoActivity extends AbsBaseActivity {
 
     @Override
     protected void setActionBarTitle(String value) {
-        super.setActionBarTitle(TITLE);
+
     }
 }

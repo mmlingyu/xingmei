@@ -17,7 +17,7 @@ public abstract class BaseApplication extends Application {
 	public final static int APP_UNINITIALIZED = 0x0;
 	public final static int APP_INITIALIZING = 0x1;
 	public final static int APP_INITIALIZED = 0x2;
-	private static Stack<FragmentActivity> mActivities;
+	private static Stack<Activity> mActivities;
 	private static BaseApplication sInstance;
 	/**
 	 * 账户管理
@@ -29,7 +29,7 @@ public abstract class BaseApplication extends Application {
 		L.plant(new L.DebugTree());
 		sInstance = this;
 		super.onCreate();
-		mActivities = new Stack<FragmentActivity>();
+		mActivities = new Stack<Activity>();
 		initSettings();
 	}
 
@@ -42,18 +42,18 @@ public abstract class BaseApplication extends Application {
 		return sInstance;
 	}
 	
-	public void addActivity(FragmentActivity activity) {
+	public void addActivity(Activity activity) {
 		if (activity == null) {
 			return;
 		}
 		mActivities.push(activity);
 	}
 
-	private Stack<FragmentActivity> getActivityStack() {
+	private Stack<Activity> getActivityStack() {
 		return mActivities;
 	}
 
-	public FragmentActivity getTopActivity() {
+	public Activity getTopActivity() {
 		if (mActivities.empty()) {
 			return null;
 		} else {

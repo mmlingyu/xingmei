@@ -5,9 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.cheyipai.core.base.modules.img.ImageHelper;
 import com.cheyipai.ui.bean.Banner;
 import com.cheyipai.ui.bean.BannerInfo;
 import com.cheyipai.ui.fragment.common.AbsBannerFragment;
@@ -16,6 +13,8 @@ import com.cheyipai.ui.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import arun.com.chromer.util.glide.GlideApp;
 
 /**
  * Created by 景涛 on 2015/9/14.
@@ -35,7 +34,8 @@ public class BannerFragment extends AbsBannerFragment {
                 iv.setLayoutParams(mParams);
                 iv.setScaleType(ImageView.ScaleType.FIT_XY);
                 iv.setTag(bannerInfo);
-                ImageHelper.getInstance().load(bannerInfo.getImgUrl(), iv);
+                //ImageHelper.getInstance().load(bannerInfo.getImgUrl(), iv);
+            GlideApp.with(this).load(bannerInfo.getImgUrl()).into(iv);
                 iv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

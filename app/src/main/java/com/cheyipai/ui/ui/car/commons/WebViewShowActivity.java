@@ -13,8 +13,8 @@ import com.cheyipai.corec.utils.NetUtil;
 import com.cheyipai.ui.R;
 import com.cheyipai.ui.fragment.common.WebFragment;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
 /**
@@ -24,7 +24,7 @@ import butterknife.OnClick;
 public class WebViewShowActivity extends AbsBaseActivity {
 
     WebFragment webFragment;
-    @InjectView(R.id.back_iv)
+    @BindView(R.id.back_iv)
     ImageView backIv;
     @OnClick(R.id.back_iv)
     public void back(){
@@ -39,11 +39,11 @@ public class WebViewShowActivity extends AbsBaseActivity {
 
     private Intent mIntent;
 
-    @InjectView(R.id.title_tv)
+    @BindView(R.id.title_tv)
     TextView title;
     @Override
     protected void init() {
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         webFragment = (WebFragment) getSupportFragmentManager().findFragmentById(R.id.web_fragment);
         mIntent = this.getIntent();
         backIv.setVisibility(View.VISIBLE);

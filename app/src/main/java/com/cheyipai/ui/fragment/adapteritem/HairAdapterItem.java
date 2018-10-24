@@ -20,18 +20,18 @@ import com.cheyipai.ui.view.XCFlowLayout;
 import java.util.Arrays;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by gjt on 2016/7/18.
  */
 public class HairAdapterItem extends AbsAdapterItem<Hair> {
 
-    @InjectView(R.id.face_name_tv)
+    @BindView(R.id.face_name_tv)
     protected TextView face_name;
 
-    @InjectView(R.id.hair_tag_flowlayout)
+    @BindView(R.id.hair_tag_flowlayout)
     protected XCFlowLayout tagFlowLatout;
 
     public HairAdapterItem() {;
@@ -44,7 +44,7 @@ public class HairAdapterItem extends AbsAdapterItem<Hair> {
 
     @Override
     public void init(View contentView) {
-        ButterKnife.inject(this, contentView);
+        ButterKnife.bind(this, contentView);
        // DialogUtils.setShapeDrawable(contentView);
 
     }
@@ -65,7 +65,7 @@ public class HairAdapterItem extends AbsAdapterItem<Hair> {
         lp.bottomMargin = 10;
 
         if(data==null||data.size()<1)return;
-        LayoutInflater inflater = LayoutInflater.from(CheyipaiApplication.getApplication());
+        LayoutInflater inflater = LayoutInflater.from(CheyipaiApplication.getInstance());
         tagFlowLatout.removeAllViews();
         for (int i = 0; i < data.size(); i++) {
             final String brand = data.get(i);
@@ -74,9 +74,9 @@ public class HairAdapterItem extends AbsAdapterItem<Hair> {
             view.setFocusable(false);
             view.setTextSize(14);
             if (Build.VERSION.SDK_INT >= 16) {
-                view.setBackground(CheyipaiApplication.getApplication().getResources().getDrawable(R.drawable.hair_item_textview_nofoucs));
+                view.setBackground(CheyipaiApplication.getInstance().getResources().getDrawable(R.drawable.hair_item_textview_nofoucs));
             } else {
-                view.setBackgroundDrawable(CheyipaiApplication.getApplication().getResources().getDrawable(R.drawable.hair_item_textview_nofoucs));
+                view.setBackgroundDrawable(CheyipaiApplication.getInstance().getResources().getDrawable(R.drawable.hair_item_textview_nofoucs));
             }
             tagFlowLatout.addView(view, lp);
         }

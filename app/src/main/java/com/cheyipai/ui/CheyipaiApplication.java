@@ -11,16 +11,17 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cheyipai.corec.modules.app.BaseApplication;
+import com.cheyipai.corec.utils.DeviceUtils;
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechUtility;
-;
 
-import java.io.File;
+import arun.com.chromer.Chromer;
+import arun.com.chromer.tabs.DefaultTabsManager;
 
 /**
  * application
  */
-public class CheyipaiApplication extends BaseApplication {
+public class CheyipaiApplication extends Chromer {
 
     private static CheyipaiApplication instance = null;
     protected Activity baseActivity;
@@ -29,11 +30,11 @@ public class CheyipaiApplication extends BaseApplication {
     public static double mLatitude, mLongitude;
     private String mTempCoor = "bd09ll";//默认
     private static final int SCAN = 60 * 1000 * 60;//定位间隔
-
+    private DefaultTabsManager defaultTabsManager;
     public static synchronized CheyipaiApplication getInstance() {
         return instance;
     }
-
+    private String ip;
 
     @Override
     public void onCreate() {
@@ -43,9 +44,22 @@ public class CheyipaiApplication extends BaseApplication {
         //初始化ImageLoaderConfiguration
         initImageLoader(getApplicationContext());
         MultiDex.install(this);
-        SpeechUtility.createUtility(this, SpeechConstant.APPID +"=57c50e37");
+        //SpeechUtility.createUtility(this, SpeechConstant.APPID +"=57c50e37");
+        //initFabric();
+        defaultTabsManager = this.getAppComponent().defaultTabsManager();
+        //ip = DeviceUtils.getIp(this);
+    }
 
+    public String getIp() {
+        return ip;
+    }
 
+    public DefaultTabsManager getDefaultTabsManager() {
+        return defaultTabsManager;
+    }
+
+    protected void initFabric() {
+       // Fabric.with(this, Crashlytics.getInstance());
     }
 
     public boolean isApkDebugable(Context context) {
@@ -63,11 +77,6 @@ public class CheyipaiApplication extends BaseApplication {
             ARouter.openDebug();   // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
         }
         ARouter.init(this); // 尽可能早，推荐在Application中初始化
-    }
-
-    @Override
-    public void initAccount() {
-
     }
 
 

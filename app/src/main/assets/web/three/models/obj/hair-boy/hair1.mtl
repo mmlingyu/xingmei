@@ -1,0 +1,11 @@
+# 
+# Wavefront material file
+# Created with Kaydara FBX
+# 
+
+newmtl hair_man1
+map_Kd 52792026025903192.jpg
+Ka 0.376623 0.376623 0.376623
+Kd 0.800000 0.800000 0.800000
+illum 1
+Tr 1.000000

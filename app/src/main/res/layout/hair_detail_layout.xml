@@ -7,6 +7,7 @@
     android:layout_height="200dip"
     >
     <ImageView
+        android:id="@+id/hair_mote_iv"
         android:layout_width="wrap_content"
         android:src="@mipmap/mote"
         android:layout_gravity="bottom"

@@ -13,12 +13,11 @@ import android.widget.ViewAnimator;
 import com.cheyipai.corec.R;
 import com.cheyipai.corec.account.AbsAccount;
 import com.cheyipai.corec.base.api.ResponseData;
+import com.cheyipai.corec.components.LoadingViewAnim;
+import com.cheyipai.corec.components.LoadingViewError;
 import com.cheyipai.corec.components.dialog.XMLoadingDialogs;
 import com.cheyipai.corec.modules.app.BaseApplication;
 import com.cheyipai.corec.components.BaseHolder;
-import com.cheyipai.corec.components.LoadingViewAnim;
-import com.cheyipai.corec.components.LoadingViewError;
-import com.cheyipai.corec.components.dialog.LoadingDialogs;
 import com.cheyipai.corec.event.IBaseEvent;
 import com.cheyipai.corec.log.L;
 import com.cheyipai.corec.utils.ToastHelper;
@@ -367,7 +366,7 @@ public abstract class   AbsBaseFragment extends Fragment {
     * */
     protected void onNoNetWorkLayoutInitAnim(View view) {
         View noNetworkLayout = view.findViewById(R.id.no_network_layout_error);
-        loadingViewError = (LoadingViewError) view.findViewById(R.id.common_loading_error);
+        //loadingViewError = (LoadingViewError) view.findViewById(R.id.common_loading_error);
         if (noNetworkLayout != null) {
             NoNetworkClickListener noNetworkClickListener = new NoNetworkClickListener();
             noNetworkLayout.setOnClickListener(noNetworkClickListener);
@@ -375,11 +374,11 @@ public abstract class   AbsBaseFragment extends Fragment {
     }
 
     protected int getLoadingLayout() {
-        return R.layout.common_loading;
+        return R.layout.x_common_loading;
     }
 
     protected void onLoadingLayoutInit(View view) {
-        loadingViewAnim = (LoadingViewAnim) view.findViewById(R.id.common_loading);
+       // loadingViewAnim = (LoadingViewAnim) view.findViewById(R.id.common_loading);
     }
 
     protected int getContentLayout() {
@@ -420,7 +419,7 @@ public abstract class   AbsBaseFragment extends Fragment {
 
     protected abstract void init(Bundle savedInstanceState, View contentView);
 
-    protected Context getContext() {
+    public Context getContext() {
         if (getActivity() instanceof AbsBaseActivity) {
             return ((AbsBaseActivity) getActivity()).getContext();
         }

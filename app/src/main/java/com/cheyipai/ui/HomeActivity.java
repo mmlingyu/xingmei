@@ -30,8 +30,8 @@ import com.ypy.eventbus.EventBus;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
 /**
@@ -49,16 +49,16 @@ public class HomeActivity extends AbsBaseActivity {
 
     private BannerFragment mBannerFragment;
 
-    @InjectView(R.id.hair_store_tv)
+    @BindView(R.id.hair_store_tv)
     protected TextView hair_store_tv;
-    @InjectView(R.id.man_tv)
+    @BindView(R.id.man_tv)
     protected TextView all_tv;
 
-    @InjectView(R.id.face_tv)
+    @BindView(R.id.face_tv)
     protected TextView face_tv;
     protected TextView cancel_tv;
     protected TextView sure_tv;
-    @InjectView(R.id.face_ll)
+    @BindView(R.id.face_ll)
     protected LinearLayout face_ll;
 
     private Dialog faceDialog;
@@ -111,7 +111,7 @@ public class HomeActivity extends AbsBaseActivity {
         checkVersion();
         initDialog();
         initView();
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         openAppStatitcs();
        //TextViewh all_tv.setText(getRadiusGradientSpan("全部",0xFFec4ce6,0xfffa4a6f));
     }

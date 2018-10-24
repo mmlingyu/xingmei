@@ -19,6 +19,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.cheyipai.corec.utils.DeviceUtils;
+import com.cheyipai.ui.CheyipaiApplication;
 import com.cheyipai.ui.R;
 
 import java.lang.ref.WeakReference;
@@ -88,7 +89,7 @@ public class SelectPicPopupWindow extends PopupWindow {
 		viewPagerCardAdapter = new ViewPagerCardAdapter();
 		mViewCard.setClipChildren(false);
 		mViewCard.setAdapter(viewPagerCardAdapter);
-		mViewCard.setPageMargin(-DeviceUtils.dpToPx(160));
+		mViewCard.setPageMargin(-DeviceUtils.dpToPx(160,CheyipaiApplication.getInstance()));
 		mViewCard.setOffscreenPageLimit(2);//预加载2个
 
 		mViewCard.setPageTransformer(true, new CardTransformer());

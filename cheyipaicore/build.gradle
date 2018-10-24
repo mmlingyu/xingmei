@@ -3,13 +3,21 @@ apply plugin: 'maven'
 
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "21.1.2"
-
+    compileSdkVersion 26
+    useLibrary 'org.apache.http.legacy'
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 19
+        targetSdkVersion 26
+        versionCode 1
+        versionName "0.1"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ moduleName : project.getName() ]
+            }
+        }
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -44,10 +52,10 @@ artifacts {
 
 dependencies {
     //compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:19.1.0'
-
-     compile files('libs/butterknife-6.1.0.jar')
-    // compile files('libs/EventBus2.4.jar')
-    provided fileTree(include: ['EventBus2.4.jar','android-support-v7-recyclerview.jar','google-gson-1.7.1.jar','umeng-analytics-v5.2.4.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:26.0.0'
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    //compile files('libs/EventBus2.4.jar')
+    compileOnly fileTree(include: ['EventBus2.4.jar','android-support-v7-recyclerview.jar','google-gson-1.7.1.jar','umeng-analytics-v5.2.4.jar'], dir: 'libs')
    // compile files('libs/umeng_social_sdk.jar')
 }

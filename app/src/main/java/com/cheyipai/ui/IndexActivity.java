@@ -79,8 +79,8 @@ public class IndexActivity extends TabActivity implements
      */
     private void initTabIntent() {
         mHomeIntent = new Intent(this, HomeActivity.class);
-        mLikeCarIntent = new Intent(this, HairStoreActivity.class);
-        mUserIntent = new Intent(this, HairStoreActivity.class);
+        mLikeCarIntent = new Intent(this, HairListActivity.class);
+        mUserIntent = new Intent(this, HairListActivity.class);
 
     }
 
