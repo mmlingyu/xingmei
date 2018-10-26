@@ -6,6 +6,8 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
+import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -40,6 +42,7 @@ import android.widget.Toast;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cheyipai.corec.activity.AbsBaseActivity;
 import com.cheyipai.corec.modules.config.GlobalConfigHelper;
+import com.cheyipai.corec.utils.EncryptUtil;
 import com.cheyipai.ui.CheyipaiApplication;
 import com.cheyipai.ui.HomeActivity;
 import com.cheyipai.ui.R;
@@ -64,6 +67,8 @@ import com.cheyipai.ui.view.SelectPicPopupWindow;
 import com.ypy.eventbus.EventBus;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -94,11 +99,11 @@ public class HairActivity extends AbsBaseActivity {
     private int PICK_IMAGE_REQUEST = 1;
     private SelectPicPopupWindow picPopupWindow;
     public static WebFragment[] fragments;
-
+    private int modelId;
     private Oauth oauth;
     private F3dStatus f3dStatus;
     private D3OauthApi d3OauthApi;
-
+    private AssetManager assetManager;
     private static final String intro="https://mp.weixin.qq.com/s?__biz=MzIyNzM2ODIyMQ==&mid=2247483695&idx=1&sn=ace240e37f3d9be9e485364791e2635e&mpshare=1&scene=1&srcid=0928dmYEHuGEZcOa12GvEdgA&pass_ticket=4SbZtPID2TQWhKPSJp3MPlQ3GaENP%2F%2Br2foKqDmc6JVLkaJC%2BZ2qi5GhZuxT8eYi#rd";
     private static final String service="https://mp.weixin.qq.com/s?__biz=MzIxMDkzNjU3Mw==&mid=2247483751&idx=1&sn=d6f72d65e56a8c7e44e8f691c0f3ebcb&chksm=975db6f5a02a3fe3633bcaee03833c79af19e307f3b3191efda75569d2434c616c9bffd63f27&mpshare=1&scene=1&srcid=09280lYNuqyeSVcZSBHvv78D&pass_ticket=4SbZtPID2TQWhKPSJp3MPlQ3GaENP%2F%2Br2foKqDmc6JVLkaJC%2BZ2qi5GhZuxT8eYi#rd";
     /**
@@ -143,17 +148,17 @@ public class HairActivity extends AbsBaseActivity {
             e.printStackTrace();
         }
     }
+
+
     @OnClick(R.id.hair_mote_iv)
     public void onMoteClick(View view){
-       // IntentUtils.aRouterIntent(this, Path.HAIR_SHOP);
-        //IntentUtils.aRouterIntent(HairActivity.this, Path.HAIR_3D);
+        IntentUtils.aRouterIntent(this, Path.HAIR_SHOP);
+        IntentUtils.aRouterIntent(HairActivity.this, Path.HAIR_3D);
        /* CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
         CustomTabsIntent customTabsIntent = builder.build();
         customTabsIntent.launchUrl(this, Uri.parse("http://192.168.96.254:8080/f3dthree/main.html"))*/;
-        CheyipaiApplication.getInstance().getDefaultTabsManager()
-                .openUrl(this,
-                        new Website("http://localhost:8001/web/main.html"),
-                        false,false,false,false,false);
+        //createAssetManager(Path.MODEL_PATH+"/model.fbx");
+
     }
 
     @OnClick(R.id.camera_face_tv)
@@ -185,6 +190,8 @@ public class HairActivity extends AbsBaseActivity {
         ButterKnife.bind(this);
         initView();
         initAuthor();
+        modelId = getIntent().getExtras().getInt(Path.KEY_HAIR_ID);
+        assetManager = this.getAssets();
         openAppStatitcs();
         Intent intent2 = new Intent(this, ServerService.class);
         startService(intent2);
@@ -194,6 +201,7 @@ public class HairActivity extends AbsBaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri uri = data.getData();
             try {
@@ -211,6 +219,7 @@ public class HairActivity extends AbsBaseActivity {
 
 
                 });*/
+                String dirPath= Path.FBX_DIR+File.pathSeparator+modelId+"/";
                 d3OauthApi.uploadUserFace("gjtFace", HairActivity.this.oauth, file, new F3dUploadCallback() {
                     @Override
                     public void onUploadSucc(final F3dStatus f3dStatus) {
@@ -232,15 +241,19 @@ public class HairActivity extends AbsBaseActivity {
                                     public void onDown(DownObj downObj) {
                                         Toast.makeText(HairActivity.this," ply - down jpg succ",Toast.LENGTH_LONG).show();
                                     }
-                                }, Environment.getExternalStorageDirectory().getAbsolutePath()+"/model.jpg");
+                                }, dirPath,"model.jpg");
 
                                 d3OauthApi.getObjOfBlendshapes(HairActivity.this.oauth, f3dStatus.getCode(), new DownF3d() {
                                     @Override
                                     public void onDown(DownObj downObj) {
                                         Toast.makeText(HairActivity.this," ply - down obj succ",Toast.LENGTH_LONG).show();
-                                        IntentUtils.aRouterIntent(HairActivity.this, Path.HAIR_3D);
+                                        //IntentUtils.aRouterIntent(HairActivity.this, Path.HAIR_3D);
+                                        CheyipaiApplication.getInstance().getDefaultTabsManager()
+                                                .openUrl(HairActivity.this,
+                                                        new Website("http://localhost:8001/web/main.html?p="+EncryptUtil.encryptData(dirPath)),
+                                                        false,false,false,false,false);
                                     }
-                                },Environment.getExternalStorageDirectory().getAbsolutePath()+"/model.zip");
+                                },dirPath,"model.fbx");
                             }
                         });
 
@@ -252,6 +265,7 @@ public class HairActivity extends AbsBaseActivity {
             }
         }
     }
+
 
     private void initView(){
         DialogUtils.setShapeDrawable(hair_ll);

@@ -74,12 +74,15 @@ public class HairListFragment extends AbsBaseDynamicListFragment {
         intent.setClass(this.getActivity(),HairActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         IntentUtil.startIntent(this.getActivity(),intent);*/
-        IntentUtils.aRouterIntent(this.getActivity(), Path.HAIR);
+        Bundle bundle = new Bundle();
+        bundle.putInt(Path.KEY_HAIR_ID,beans.get(position).getId());
+        IntentUtils.aRouterIntent(this.getActivity(), Path.HAIR,bundle);
     }
 
     private void initData(){
         for(int i=s;i<pos;i++){
             Hair hair = new Hair();
+            hair.setId(i);
             hair.setFaceTypes("圆脸|方脸|椭圆脸");
             hair.setName("清爽迷你姑"+i);
             hair.setZan(69880);

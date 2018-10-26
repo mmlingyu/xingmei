@@ -15,7 +15,7 @@
       <!-- Div which will hold the Output -->
       <div id="WebGL-output"></div>
 
-<script src="jquery.min.js"></script>
+<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
 	<script src="three/js/Detector.js"></script>
 	<script src="build/three.js"></script>
 	<script src="three/js/controls/TrackballControls.js"></script
@@ -29,12 +29,28 @@
 	<script src="three/js/loaders/LoaderSupport.js"></script>
 	<script src="three/js/controls/OrbitControls.js"></script>
 	<script src="three/js/loaders/OBJLoader.js"></script>
-	
+	<script type="text/javascript" src="three/crypto-js.js"></script>
+	<script type="text/javascript" src="three/aes.js"></script>
 	 <script type="text/javascript" src="three/js/libs/stats.min.js"></script>
 <script>
     var renderer;
     var path = "three/models/obj/hairg/";
     var pathply = "three/models/fbx/1/";
+    
+    // aes解密
+	function decrypt(word) {
+	    var key = CryptoJS.enc.Utf8.parse('1234123412341324');
+	    var iv  = CryptoJS.enc.Utf8.parse('1234123412341234');
+	
+	    var decrypt = CryptoJS.AES.decrypt(word, key, {
+	        iv: iv,
+	        mode: CryptoJS.mode.CBC,
+	        padding: CryptoJS.pad.Pkcs7
+	    });
+	    var decryptedStr = decrypt.toString(CryptoJS.enc.Utf8);
+	    return decryptedStr.toString();
+	}
+   
     function initRender() {
         renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
@@ -44,6 +60,22 @@
 		renderer.shadowMapEnabled = true;
         document.body.appendChild(renderer.domElement);
     }
+    
+    function GetRequest() { 
+	   var url = location.search; //获取url中"?"符后的字串 
+	   var theRequest = new Object(); 
+	   if (url.indexOf("?") != -1) { 
+	      var str = url.substr(1); 
+	      strs = str.split("&"); 
+	      for(var i = 0; i < strs.length; i ++) { 
+	         theRequest[strs[i].split("-")[0]]=unescape(strs[i].split("-")[1]); 
+	      } 
+	   } 
+	   pathply = theRequest['p'];
+	   alert(decrypt(pathply)+"|||"+pathply);
+	   return theRequest; 
+	
+	}
 
     var camera;
     function initCamera() {
@@ -220,6 +252,7 @@
     }
 
     function draw() {
+    	GetRequest();
         initGui();
         initRender();
         initScene();

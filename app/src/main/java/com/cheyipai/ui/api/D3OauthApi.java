@@ -21,6 +21,7 @@ import com.cheyipai.ui.bean.Oauth;
 import com.cheyipai.ui.bean.OauthCallback;
 import com.cheyipai.ui.bean.OauthPlayer;
 import com.cheyipai.ui.bean.Status;
+import com.cheyipai.ui.commons.Path;
 import com.cheyipai.ui.utils.ZipUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -89,12 +90,12 @@ public class D3OauthApi {
         this.weakcontext = new WeakReference<Context>(context);
     }
 
-    public void getObjOfBlendshapes(final Oauth oauth,final String code,  final DownF3d downF3d, final String filepath) {
+    public void getObjOfBlendshapes(final Oauth oauth,final String code,  final DownF3d downF3d, final String filepath,final String name) {
         try {
             new Thread() {
                 @Override
                 public void run() {
-                    DownloadObj(oauth, "https://api.avatarsdk.com/avatars/" + code + "/blendshapes?fmt=fbx", filepath, downF3d);
+                    DownloadObj(oauth, "https://api.avatarsdk.com/avatars/" + code + "/blendshapes?fmt=fbx", filepath,name, downF3d);
                 }
             }.start();
 
@@ -185,7 +186,7 @@ public class D3OauthApi {
 
     }
 
-    public  boolean DownloadSmallFile(Oauth oauth, final String uri, final String filePath, final DownF3d downF3d) {
+    public  boolean DownloadSmallFile(Oauth oauth, final String uri, final String filePath,final String name, final DownF3d downF3d) {
         Request request = new Request.Builder().url(uri.toString()).header("Authorization",oauth.getToken()).header("X-PlayerUID",oauth.getPlayer()).build();
 
         try {
@@ -197,8 +198,12 @@ public class D3OauthApi {
             ResponseBody body = response.body();
             long contentLength = body.contentLength();
             BufferedSource source = body.source();
-            File file = new File(filePath);
-            BufferedSink sink = Okio.buffer(Okio.sink(file));
+            File dir = new File(filePath);
+            if(!dir.exists()){
+                dir.mkdir();
+            }
+
+            BufferedSink sink = Okio.buffer(Okio.sink(new File(dir+File.pathSeparator+name)));
             sink.writeAll(source);
             sink.flush();
             ((Activity)weakcontext.get()).runOnUiThread(new Runnable() {
@@ -215,7 +220,7 @@ public class D3OauthApi {
         return true;
     }
 
-    public  boolean DownloadObj(Oauth oauth, final String uri, final String filePath, final DownF3d downF3d) {
+    public  boolean DownloadObj(Oauth oauth, final String uri, final String filePath,final String name, final DownF3d downF3d) {
         Request request = new Request.Builder().url(uri.toString()).header("Authorization",oauth.getToken()).header("X-PlayerUID",oauth.getPlayer()).build();
 
         try {
@@ -227,11 +232,15 @@ public class D3OauthApi {
             ResponseBody body = response.body();
             long contentLength = body.contentLength();
             BufferedSource source = body.source();
-            File file = new File(filePath);
-            BufferedSink sink = Okio.buffer(Okio.sink(file));
+            File dir = new File(filePath);
+            if(!dir.exists()){
+                dir.mkdir();
+            }
+
+            BufferedSink sink = Okio.buffer(Okio.sink(new File(dir+File.pathSeparator+"model.zip")));
             sink.writeAll(source);
             sink.flush();
-            ZipUtils.UnZipFolder(filePath,Environment.getExternalStorageDirectory().getAbsolutePath(),"model.fbx");
+            ZipUtils.UnZipFolder(filePath,dir.getAbsolutePath(),name);
             ((Activity)weakcontext.get()).runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -249,12 +258,12 @@ public class D3OauthApi {
     }
 
 
-    public void get(final Oauth oauth, final String url, final DownF3d downF3d, final String filepath){
+    public void get(final Oauth oauth, final String url, final DownF3d downF3d, final String filepath,final String name){
         try {
             new Thread() {
                 @Override
                 public void run() {
-                    DownloadSmallFile(oauth, url, filepath,downF3d);
+                    DownloadSmallFile(oauth, url, filepath,name,downF3d);
                 }}.start();
 
         } catch (Exception e) {

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/cheyipaicore/cheyipaicore.iml" filepath="$PROJECT_DIR$/cheyipaicore/cheyipaicore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/disk-cache/disk-cache.iml" filepath="$PROJECT_DIR$/disk-cache/disk-cache.iml" />
       <module fileurl="file://$PROJECT_DIR$/xingmei.iml" filepath="$PROJECT_DIR$/xingmei.iml" />
     </modules>
   </component>

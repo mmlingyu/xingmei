@@ -10,6 +10,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/cheyipaicore" />
+            <option value="$PROJECT_DIR$/disk-cache" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -4,12 +4,20 @@ package com.cheyipai.ui.bean;
  * Created by gjt on 2016/7/18.
  */
 public class Hair {
-
+    private int id;
     private String name;
     private String tags;//  |分割的数组
     private int sex;
     private int zan;
     private String faceTypes;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getTags() {
         return tags;
