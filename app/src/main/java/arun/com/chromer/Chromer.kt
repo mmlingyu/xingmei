@@ -29,13 +29,24 @@ import arun.com.chromer.di.app.AppComponent
 import arun.com.chromer.di.app.AppModule
 import arun.com.chromer.di.app.DaggerAppComponent
 import arun.com.chromer.util.ServiceManager
+import com.cheyipai.core.base.modules.app.BaseApplication
 import com.cheyipai.ui.BuildConfig
 import io.paperdb.Paper
 
 /**
  * Created by Arun on 06/01/2016.
  */
-open class Chromer : Application() {
+open class Chromer : BaseApplication() {
+    override fun initLoation() {
+    }
+
+    override fun initAccount() {
+
+    }
+
+    override fun initAppCode() {
+
+    }
 
     open val appComponent: AppComponent by lazy {
         DaggerAppComponent.builder()

@@ -36,7 +36,10 @@
     var renderer;
     var path = "three/models/obj/hairg/";
     var pathply = "three/models/fbx/1/";
-    
+      function alltrim(x) {
+        return x.replace(/(^\s*)|(\s*$)/g,'');
+    	}
+
     // aes解密
 	function decrypt(word) {
 	    var key = CryptoJS.enc.Utf8.parse('1234123412341324');
@@ -45,7 +48,7 @@
 	    var decrypt = CryptoJS.AES.decrypt(word, key, {
 	        iv: iv,
 	        mode: CryptoJS.mode.CBC,
-	        padding: CryptoJS.pad.Pkcs7
+	        padding: CryptoJS.pad.NoPadding
 	    });
 	    var decryptedStr = decrypt.toString(CryptoJS.enc.Utf8);
 	    return decryptedStr.toString();
@@ -68,12 +71,13 @@
 	      var str = url.substr(1); 
 	      strs = str.split("&"); 
 	      for(var i = 0; i < strs.length; i ++) { 
-	         theRequest[strs[i].split("-")[0]]=unescape(strs[i].split("-")[1]); 
+	         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
 	      } 
-	   } 
-	   pathply = theRequest['p'];
-	   alert(decrypt(pathply)+"|||"+pathply);
-	   return theRequest; 
+	   }
+	   if(theRequest['p'] == null||theRequest['p']==undefined) return theRequest;
+        pathply = alltrim(decrypt(theRequest['p']));
+        pathply = pathply.substr(0,pathply.length-14)+"/";
+	   return theRequest;
 	
 	}
 

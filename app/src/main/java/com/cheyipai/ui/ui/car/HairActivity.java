@@ -23,6 +23,7 @@ import android.provider.MediaStore;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -40,6 +41,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.cheyipai.core.base.bean.LoginUserBean;
+import com.cheyipai.core.base.common.CypGlobalBaseInfo;
 import com.cheyipai.corec.activity.AbsBaseActivity;
 import com.cheyipai.corec.modules.config.GlobalConfigHelper;
 import com.cheyipai.corec.utils.EncryptUtil;
@@ -86,7 +89,6 @@ import arun.com.chromer.tabs.TabsManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
 /**
  * 首页
  */
@@ -136,11 +138,26 @@ public class HairActivity extends AbsBaseActivity {
 
     public void initAuthor(){
         try {
+            LoginUserBean.DataBean dataBean = CypGlobalBaseInfo.getLoginUserDataBean();
+            if(!TextUtils.isEmpty(dataBean.getAreaIDs())){
+                oauth= new Oauth();
+                oauth.setAccess_token(dataBean.getAreaIDs());
+                oauth.setToken_type(dataBean.getAreaNames());
+                oauth.setCode(dataBean.getBusinessId());
+                oauth.setPlayer(dataBean.getBusId());
+                return;
+            }
             d3OauthApi = new D3OauthApi(this);
             d3OauthApi.getAuthor("gjt825", new OauthCallback() {
                 @Override
                 public void onOauthSucc(Oauth oauth) {
                     HairActivity.this.oauth = oauth;
+                    LoginUserBean.DataBean dataBean = new LoginUserBean.DataBean();
+                    dataBean.setAreaIDs(oauth.getAccess_token());
+                    dataBean.setAreaNames(oauth.getToken_type());
+                    dataBean.setBusinessId(oauth.getCode());
+                    dataBean.setBusId(oauth.getPlayer());
+                    CypGlobalBaseInfo.saveLoginInfo(HairActivity.this,dataBean);
                     Toast.makeText(HairActivity.this,"初始化成功！",Toast.LENGTH_LONG).show();
                 }
             });
@@ -177,6 +194,7 @@ public class HairActivity extends AbsBaseActivity {
     protected void onStart() {
         super.onStart();
         setfragment();
+
     }
 
 
@@ -193,7 +211,7 @@ public class HairActivity extends AbsBaseActivity {
         modelId = getIntent().getExtras().getInt(Path.KEY_HAIR_ID);
         assetManager = this.getAssets();
         openAppStatitcs();
-        Intent intent2 = new Intent(this, ServerService.class);
+        Intent intent2 = new Intent(HairActivity.this, ServerService.class);
         startService(intent2);
        //TextViewh all_tv.setText(getRadiusGradientSpan("全部",0xFFec4ce6,0xfffa4a6f));
     }
@@ -219,7 +237,8 @@ public class HairActivity extends AbsBaseActivity {
 
 
                 });*/
-                String dirPath= Path.FBX_DIR+File.pathSeparator+modelId+"/";
+                String dirPath= Path.FBX_DIR+File.separator+modelId;
+                String webDirPath =Path.WEB_FBX_DIR+File.separator+modelId+File.separator;
                 d3OauthApi.uploadUserFace("gjtFace", HairActivity.this.oauth, file, new F3dUploadCallback() {
                     @Override
                     public void onUploadSucc(final F3dStatus f3dStatus) {
@@ -248,9 +267,11 @@ public class HairActivity extends AbsBaseActivity {
                                     public void onDown(DownObj downObj) {
                                         Toast.makeText(HairActivity.this," ply - down obj succ",Toast.LENGTH_LONG).show();
                                         //IntentUtils.aRouterIntent(HairActivity.this, Path.HAIR_3D);
+                                        Intent intent2 = new Intent(HairActivity.this, ServerService.class);
+                                        startService(intent2);
                                         CheyipaiApplication.getInstance().getDefaultTabsManager()
                                                 .openUrl(HairActivity.this,
-                                                        new Website("http://localhost:8001/web/main.html?p="+EncryptUtil.encryptData(dirPath)),
+                                                        new Website("http://localhost:8001/web/ply.jsp?p="+EncryptUtil.encryptData(webDirPath)),
                                                         false,false,false,false,false);
                                     }
                                 },dirPath,"model.fbx");

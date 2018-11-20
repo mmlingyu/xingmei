@@ -9,6 +9,7 @@ import com.cheyipai.core.base.utils.SharedPrefersUtils;
 import com.cheyipai.corec.activity.AbsBaseFragment;
 import com.cheyipai.corec.base.api.APIParams;
 import com.cheyipai.corec.base.api.AbsAPIRequestNew;
+import com.cheyipai.corec.log.L;
 import com.cheyipai.ui.APIS;
 import com.cheyipai.ui.bean.CarBrand;
 import com.cheyipai.ui.bean.DownF3d;
@@ -134,9 +135,11 @@ public class D3OauthApi {
     }
     public void getAuthor(final String user, final OauthCallback callback) throws IOException {
         Map<String, String> source = new HashMap<>();
-        source.put("client_id", "LqimjWVsBi40Wd3K815t0WwqcvyElK9kUJTPNetr");
+        //source.put("client_id", "LqimjWVsBi40Wd3K815t0WwqcvyElK9kUJTPNetr");
+        source.put("client_id", "ODbD11xsAJG9iNaYyzwUk3O1H5t6mJwq9SaHhvYo");
+        source.put("client_secret", "LJmm49zmxwy4Ju6MUqTvwdq1ObDHPR13ilc1z0knL7ca3pgPhChS1ps9YJeTWQ7leZKJUWIRErNlPjkjX7ftViSrS34Nt6vkiFnwbOcA8fnQ4b9oNCwSuJ2peWVbxxGj");
         source.put("grant_type", "client_credentials");
-        source.put("client_secret", "jYmfcHSTQqP6U7haJ4KOu4MlEIMNLYhAgnbyyBMlMZytSZK1RY13uwU7kas08TCexIkqWco8RaGUuRPqPtOQmGIGf99ASqj9dfGSM6abWuF4XwQeglbNXkVtLZL0zSeu");
+        //source.put("client_secret", "jYmfcHSTQqP6U7haJ4KOu4MlEIMNLYhAgnbyyBMlMZytSZK1RY13uwU7kas08TCexIkqWco8RaGUuRPqPtOQmGIGf99ASqj9dfGSM6abWuF4XwQeglbNXkVtLZL0zSeu");
         RetrofitClinetImpl.getInstance(weakcontext.get()).setIsUseHttps(true)
                 .setRetrofitBaseURL("https://api.avatarsdk.com/")
                 .newRetrofitClient()
@@ -153,7 +156,7 @@ public class D3OauthApi {
 
                     @Override
                     public void onFailure(Throwable throwable) {
-
+                        L.e("onFailure",throwable.getLocalizedMessage());
                     }
                 });
 
@@ -203,7 +206,7 @@ public class D3OauthApi {
                 dir.mkdir();
             }
 
-            BufferedSink sink = Okio.buffer(Okio.sink(new File(dir+File.pathSeparator+name)));
+            BufferedSink sink = Okio.buffer(Okio.sink(new File(dir+File.separator+name)));
             sink.writeAll(source);
             sink.flush();
             ((Activity)weakcontext.get()).runOnUiThread(new Runnable() {
@@ -237,10 +240,10 @@ public class D3OauthApi {
                 dir.mkdir();
             }
 
-            BufferedSink sink = Okio.buffer(Okio.sink(new File(dir+File.pathSeparator+"model.zip")));
+            BufferedSink sink = Okio.buffer(Okio.sink(new File(dir+File.separator+"model.zip")));
             sink.writeAll(source);
             sink.flush();
-            ZipUtils.UnZipFolder(filePath,dir.getAbsolutePath(),name);
+            ZipUtils.UnZipFolder(dir+File.separator+"model.zip",dir.getAbsolutePath(),name);
             ((Activity)weakcontext.get()).runOnUiThread(new Runnable() {
                 @Override
                 public void run() {

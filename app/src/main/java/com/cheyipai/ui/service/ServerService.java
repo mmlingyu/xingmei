@@ -101,7 +101,7 @@ public class ServerService extends Service {
         new Thread(new Runnable() {
               @Override
               public void run() {
-                  copyAssetsDir2Phone(Path.WEB_PATH);
+                  //copyAssetsDir2Phone(Path.WEB_PATH);
                   File file = new File(Environment.getExternalStorageDirectory(), Path.WEB_PATH);
                   String websiteDirectory = file.getAbsolutePath();
                  // String path = getPath(websiteDirectory);
@@ -110,7 +110,6 @@ public class ServerService extends Service {
                   server = andServer.createServer();
                   if(server!=null)
                       if(!server.isRunning()){
-
                           server.start();
                       }
               }

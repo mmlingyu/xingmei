@@ -27,6 +27,7 @@ import android.os.Parcelable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.chimbori.crux.articles.Article;
 
@@ -55,6 +56,7 @@ public class Website implements Parcelable {
 
     public Website(@NonNull String url) {
         this.url = url;
+        Log.d("lweb:",url);
     }
 
     public Website(String title, String url, String faviconUrl,

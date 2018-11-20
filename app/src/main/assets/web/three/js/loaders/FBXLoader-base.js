@@ -101,7 +101,7 @@ THREE.FBXLoader = ( function () {
 
 			//console.log( FBXTree );
 
-			var textureLoader = new THREE.TextureLoader( this.manager ).setPath(resourceDirectory).setCrossOrigin( this.crossOrigin );
+			var textureLoader = new THREE.TextureLoader( this.manager ).setPath( resourceDirectory ).setCrossOrigin( this.crossOrigin );
 
 			return new FBXTreeParser( textureLoader ).parse( fbxTree );
 
@@ -202,7 +202,7 @@ THREE.FBXLoader = ( function () {
 
 					var id = parseInt( nodeID );
 
-					images[ id ] = videoNode.Filename || videoNode.RelativeFilename ;
+					images[ id ] = videoNode.RelativeFilename || videoNode.Filename;
 
 					// raw image data is in videoNode.Content
 					if ( 'Content' in videoNode ) {
@@ -214,7 +214,7 @@ THREE.FBXLoader = ( function () {
 
 							var image = this.parseImage( videoNodes[ nodeID ] );
 
-							blobs[videoNode.Filename || videoNode.RelativeFilename  ] = image;
+							blobs[ videoNode.RelativeFilename || videoNode.Filename ] = image;
 
 						}
 

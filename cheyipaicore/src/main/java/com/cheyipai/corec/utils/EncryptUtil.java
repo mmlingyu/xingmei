@@ -37,15 +37,15 @@ public class EncryptUtil {
         try {
             Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
             int blockSize = cipher.getBlockSize();
-            byte[] dataBytes = data.getBytes();
+            byte[] dataBytes = data.getBytes("UTF-8");
             int plaintextLength = dataBytes.length;
             if (plaintextLength % blockSize != 0) {
                 plaintextLength = plaintextLength + (blockSize - (plaintextLength % blockSize));
             }
             byte[] plaintext = new byte[plaintextLength];
             System.arraycopy(dataBytes, 0, plaintext, 0, dataBytes.length);
-            SecretKeySpec keyspec = new SecretKeySpec(KEY.getBytes(), "AES");
-            IvParameterSpec ivspec = new IvParameterSpec(IV.getBytes());
+            SecretKeySpec keyspec = new SecretKeySpec(KEY.getBytes("UTF-8"), "AES");
+            IvParameterSpec ivspec = new IvParameterSpec(IV.getBytes("UTF-8"));
             cipher.init(Cipher.ENCRYPT_MODE, keyspec, ivspec);
             byte[] encrypted = cipher.doFinal(plaintext);
             return new String(Base64.encodeBase64(encrypted));
