@@ -50,20 +50,14 @@ import okio.Okio;
 /**
  * Created by Administrator on 2016/8/19.
  */
-public class BaiduOauthApi {
+public class BaiduOauthApi extends BaseApi {
     public static final MediaType urlencode = MediaType.parse("application/x-www-form-urlencoded;");
     private WeakReference<Context> weakcontext;
-    public final static int CONNECT_TIMEOUT = 60;
-    public final static int READ_TIMEOUT = 100;
-    public final static int WRITE_TIMEOUT = 60;
 
     public BaiduOauthApi(Context context){
         this.weakcontext = new WeakReference<Context>(context);
     }
-    public static final OkHttpClient client = new OkHttpClient.Builder()
-            .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)//设置读取超时时间
-            .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)//设置写的超时时间
-            .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS).build();//设置连接超时时间
+
 
     /**
      * 获取权限token
@@ -138,7 +132,7 @@ public class BaiduOauthApi {
      */
     public  void detect(String filePath,String accessToken, OauthBack oauthBack) {
         String url = "https://aip.baidubce.com/rest/2.0/face/v3/detect";
-        try {
+            try {
             Map<String, Object> map = new HashMap<>();
             map.put("image", Base64Util.encode(FileUtil.readFileByBytes(filePath)).toString());
             map.put("face_field", "age,beauty,expression,face_shape,gender,glasses,landmark,race,quality,face_type");

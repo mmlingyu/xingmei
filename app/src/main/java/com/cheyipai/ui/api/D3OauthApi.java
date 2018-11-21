@@ -59,9 +59,9 @@ import okio.Okio;
 public class D3OauthApi {
     public static final MediaType JSON = MediaType.parse("application/x-www-form-urlencoded;");
     private WeakReference<Context> weakcontext;
-    public final static int CONNECT_TIMEOUT = 60;
+    public final static int CONNECT_TIMEOUT = 100;
     public final static int READ_TIMEOUT = 100;
-    public final static int WRITE_TIMEOUT = 60;
+    public final static int WRITE_TIMEOUT = 100;
     private static final String LINE_STATIC_NONE="static";//静态光头与单独的理发
     private static final String LINE_ANIMATED_FACE="animated_face";//静态光头，带有一组用于动画和单独理发的混合形状;
     private static final String LINE_HEAD="head";//预测头部，理发和胸围| 预测头部，理发和胸部与一组混合形状（45面部，17个visems）的动画|预测头部，理发和胸部与一组混合形状（51面部）的动画
@@ -243,6 +243,7 @@ public class D3OauthApi {
             BufferedSink sink = Okio.buffer(Okio.sink(new File(dir+File.separator+"model.zip")));
             sink.writeAll(source);
             sink.flush();
+            Log.d("downloaded fbx",uri);
             ZipUtils.UnZipFolder(dir+File.separator+"model.zip",dir.getAbsolutePath(),name);
             ((Activity)weakcontext.get()).runOnUiThread(new Runnable() {
                 @Override

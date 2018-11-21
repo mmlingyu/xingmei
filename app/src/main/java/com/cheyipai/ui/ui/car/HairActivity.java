@@ -4,52 +4,29 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.ContentUris;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
-import android.content.res.Resources;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.support.customtabs.CustomTabsIntent;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TabHost;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.cheyipai.core.base.bean.LoginUserBean;
-import com.cheyipai.core.base.common.CypGlobalBaseInfo;
 import com.cheyipai.corec.activity.AbsBaseActivity;
-import com.cheyipai.corec.modules.config.GlobalConfigHelper;
 import com.cheyipai.corec.utils.EncryptUtil;
 import com.cheyipai.ui.CheyipaiApplication;
-import com.cheyipai.ui.HomeActivity;
 import com.cheyipai.ui.R;
 import com.cheyipai.ui.api.D3OauthApi;
+import com.cheyipai.ui.bean.BaseCallBack;
 import com.cheyipai.ui.bean.DownF3d;
 import com.cheyipai.ui.bean.DownObj;
 import com.cheyipai.ui.bean.F3d;
@@ -61,35 +38,19 @@ import com.cheyipai.ui.bean.Oauth;
 import com.cheyipai.ui.bean.OauthCallback;
 import com.cheyipai.ui.commons.EventCode;
 import com.cheyipai.ui.commons.Path;
-import com.cheyipai.ui.fragment.BannerFragment;
 import com.cheyipai.ui.fragment.common.WebFragment;
-import com.cheyipai.ui.service.ServerService;
 import com.cheyipai.ui.utils.BitmapUtil;
 import com.cheyipai.ui.utils.DialogUtils;
 import com.cheyipai.ui.utils.IntentUtils;
 import com.cheyipai.ui.utils.ShareDataHelper;
-import com.cheyipai.ui.view.ScrollListView;
 import com.cheyipai.ui.view.SelectPicPopupWindow;
+import com.cheyipai.ui.vm.HairVM;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.ypy.eventbus.EventBus;
-
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
-
-import arun.com.chromer.appdetect.AppDetectionManager;
-import arun.com.chromer.data.website.DefaultWebsiteRepository_Factory;
-import arun.com.chromer.data.website.WebsiteRepository;
 import arun.com.chromer.data.website.model.Website;
-import arun.com.chromer.settings.Preferences;
-import arun.com.chromer.tabs.DefaultTabsManager;
-import arun.com.chromer.tabs.TabsManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -145,6 +106,7 @@ public class HairActivity extends AbsBaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        mHair = (Hair) ShareDataHelper.readObject(ShareDataHelper.HAIR,HairActivity.this,ShareDataHelper.HAIR_ID+modelId);
         initView();
     }
 
@@ -186,8 +148,8 @@ public class HairActivity extends AbsBaseActivity {
 
     @OnClick(R.id.hair_mote_iv)
     public void onMoteClick(View view){
-        //IntentUtils.aRouterIntent(this, Path.HAIR_SHOP);
-        IntentUtils.aRouterIntent(HairActivity.this, Path.HAIR_3D);
+        IntentUtils.aRouterIntent(this, Path.HAIR_SHOP);
+        //IntentUtils.aRouterIntent(HairActivity.this, Path.HAIR_3D);
        /* CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
         CustomTabsIntent customTabsIntent = builder.build();
         customTabsIntent.launchUrl(this, Uri.parse("http://192.168.96.254:8080/f3dthree/main.html"))*/;
@@ -318,8 +280,8 @@ public class HairActivity extends AbsBaseActivity {
     }
 
     private void openUrl(String url){
-        Intent intent2 = new Intent(HairActivity.this, ServerService.class);
-        startService(intent2);
+      /*  Intent intent2 = new Intent(HairActivity.this, ServerService.class);
+        startService(intent2)*/;
         CheyipaiApplication.getInstance().getDefaultTabsManager()
                 .openUrl(HairActivity.this,
                         new Website(url),
@@ -333,7 +295,20 @@ public class HairActivity extends AbsBaseActivity {
             userFace.setVisibility(View.VISIBLE);
             user_face_ll.setVisibility(View.VISIBLE);
             try {
-                userFace.setImageBitmap(BitmapUtil.loadBitmap(mHair.getFaceFile(),true));
+                DialogUtils.setShapeDrawable(user_face_ll);
+                if(TextUtils.isEmpty(mHair.getFace())){
+                    new HairVM(this).segmentFace(mHair.getFaceFile(),Path.USER_FACE_IMAGES,new BaseCallBack<String>(){
+                        @Override
+                        public void onCallBack(String s) {
+                            mHair.setFace(s);
+                            userFace.setImageBitmap(BitmapUtil.loadBitmap(s,true));
+                            ShareDataHelper.saveObject(ShareDataHelper.HAIR,HairActivity.this,ShareDataHelper.HAIR_ID+modelId,mHair);
+                        }
+                    });
+                }else {
+                    userFace.setImageBitmap(BitmapUtil.loadBitmap(mHair.getFace(), true));
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -379,8 +354,8 @@ public class HairActivity extends AbsBaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
-        Intent intent2 = new Intent(this, ServerService.class);
-        stopService(intent2);
+       /* Intent intent2 = new Intent(this, ServerService.class);
+        stopService(intent2);*/
     }
 
     /**

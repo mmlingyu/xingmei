@@ -105,12 +105,12 @@ public class HairShowFragment extends AbsBaseFragment implements GestureDetector
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float v, float v1) {
         Log.i(getClass().getName(), "onScroll-----"+v+"|"+v1+"|"+e1.getX()+"|"+e2.getX());
-        if (e2.getX() - e1.getX() > DeviceUtils.getScreenWidth()/3) {
+        if (e2.getX() - e1.getX() > DeviceUtils.getScreenWidth(this.getContext())/3) {
             // this.flipper.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.push_left_in));
             //this.flipper.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.push_left_out));
             this.flipper.showNext();
             return true;
-        } else if (e2.getX() - e1.getX() < -(DeviceUtils.getScreenWidth()/3)) {
+        } else if (e2.getX() - e1.getX() < -(DeviceUtils.getScreenWidth(this.getContext())/3)) {
             // this.flipper.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.push_right_in));
             // this.flipper.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.push_right_out));
             this.flipper.showPrevious();

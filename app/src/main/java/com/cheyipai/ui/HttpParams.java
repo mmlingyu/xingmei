@@ -51,8 +51,8 @@ public class HttpParams extends AbsHttpParams {
 //        打开类型 0-自身打开 1-H5打开
         header.put("ow", "0");
 //        分辨率 1280_800
-        header.put("sc",
-                String.valueOf(DeviceUtils.getScreenHeight()).concat("_").concat(String.valueOf(DeviceUtils.getScreenWidth())));
+        /*header.put("sc",
+                String.valueOf(DeviceUtils.getScreenHeight()).concat("_").concat(String.valueOf(DeviceUtils.getScreenWidth())));*/
 
 //        加密标识，0-未加密 ，1-加密
         header.put("e", "1");

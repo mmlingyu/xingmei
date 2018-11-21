@@ -14,6 +14,15 @@ public class Hair implements Serializable {
     private String faceTypes;
     private String modelPath;
     private String faceFile;
+    private String face;//face ++
+
+    public String getFace() {
+        return face;
+    }
+
+    public void setFace(String face) {
+        this.face = face;
+    }
 
     public String getModelPath() {
         return modelPath;

@@ -12,8 +12,9 @@
     <include layout="@layout/hair_common_head" />
         <com.wang.avi.AVLoadingIndicatorView
             android:id="@+id/avi"
+            android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/dimen_8"
+            android:layout_height="@dimen/dimen_16"
             app:indicatorName="BallPulse"
             android:layout_marginLeft="@dimen/dimen_15"
             app:indicatorColor="#ffec4ce6"
@@ -52,14 +53,15 @@
                 android:layout_width="match_parent"
                 android:layout_marginLeft="@dimen/dimen_15"
                 android:layout_marginRight="@dimen/dimen_15"
-                android:background="@color/lightGrey"
                 android:id="@+id/user_face_ll"
                 android:layout_height="wrap_content">
                 <ImageView
                     android:id="@+id/user_face"
+                    android:padding="@dimen/dimen_4"
                     android:layout_width="match_parent"
                     android:scaleType="fitCenter"
-                    android:layout_height="@dimen/dimen_200" />
+                    android:layout_marginBottom="@dimen/dimen_8"
+                    android:layout_height="@dimen/dimen_180" />
 
             </LinearLayout>
             <TextView
@@ -68,7 +70,7 @@
                 android:drawablePadding="@dimen/dimen_10"
                 android:gravity="center_horizontal"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="@dimen/dimen_10"
+                android:layout_margin="@dimen/dimen_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

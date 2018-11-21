@@ -20,8 +20,8 @@ public class DeviceUtils {
 	/**
 	 * 得到设备屏幕的宽度
 	 */
-	public static int getScreenWidth() {
-        WindowManager wm = (WindowManager) BaseApplication.getApplication()
+	public static int getScreenWidth(Context context) {
+        WindowManager wm = (WindowManager) context
                 .getSystemService(Context.WINDOW_SERVICE);
 		return wm.getDefaultDisplay().getWidth();
 	}
