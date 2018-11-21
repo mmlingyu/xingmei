@@ -1,15 +1,35 @@
 package com.cheyipai.ui.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by gjt on 2016/7/18.
  */
-public class Hair {
+public class Hair implements Serializable {
     private int id;
     private String name;
     private String tags;//  |分割的数组
     private int sex;
     private int zan;
     private String faceTypes;
+    private String modelPath;
+    private String faceFile;
+
+    public String getModelPath() {
+        return modelPath;
+    }
+
+    public void setModelPath(String modelPath) {
+        this.modelPath = modelPath;
+    }
+
+    public String getFaceFile() {
+        return faceFile;
+    }
+
+    public void setFaceFile(String faceFile) {
+        this.faceFile = faceFile;
+    }
 
     public int getId() {
         return id;

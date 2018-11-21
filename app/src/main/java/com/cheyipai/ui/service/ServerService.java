@@ -108,10 +108,11 @@ public class ServerService extends Service {
                   WebSite wesite = new XStorageWebsite(websiteDirectory);
                   andServer = new AndServer.Build().website(wesite).listener(mListener).port(8001).timeout(10 * 1000).build();
                   server = andServer.createServer();
-                  if(server!=null)
-                      if(!server.isRunning()){
+                  if(server!=null) {
+                      if (!server.isRunning()) {
                           server.start();
                       }
+                  }
               }
           }).start();
 

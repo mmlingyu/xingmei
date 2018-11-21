@@ -1,10 +1,12 @@
 package com.cheyipai.ui.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2018/8/8.
  */
 
-public class Oauth {
+public class Oauth implements Serializable {
     String access_token;
     String token_type;
     String code;

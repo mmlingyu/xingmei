@@ -23,6 +23,8 @@ import com.cheyipai.corec.activity.AbsBaseActivity;
 import com.cheyipai.corec.modules.config.GlobalConfigHelper;
 import com.cheyipai.ui.commons.Path;
 import com.cheyipai.ui.fragment.BannerFragment;
+import com.cheyipai.ui.service.ServerService;
+import com.cheyipai.ui.ui.car.HairActivity;
 import com.cheyipai.ui.utils.IntentUtils;
 import com.cheyipai.ui.view.ScrollListView;
 import com.ypy.eventbus.EventBus;
@@ -113,6 +115,8 @@ public class HomeActivity extends AbsBaseActivity {
         initView();
         ButterKnife.bind(this);
         openAppStatitcs();
+        Intent intent2 = new Intent(HomeActivity.this, ServerService.class);
+        startService(intent2);
        //TextViewh all_tv.setText(getRadiusGradientSpan("全部",0xFFec4ce6,0xfffa4a6f));
     }
 

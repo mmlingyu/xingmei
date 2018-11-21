@@ -56,6 +56,7 @@ import com.cheyipai.ui.bean.F3d;
 import com.cheyipai.ui.bean.F3dCallback;
 import com.cheyipai.ui.bean.F3dStatus;
 import com.cheyipai.ui.bean.F3dUploadCallback;
+import com.cheyipai.ui.bean.Hair;
 import com.cheyipai.ui.bean.Oauth;
 import com.cheyipai.ui.bean.OauthCallback;
 import com.cheyipai.ui.commons.EventCode;
@@ -63,10 +64,13 @@ import com.cheyipai.ui.commons.Path;
 import com.cheyipai.ui.fragment.BannerFragment;
 import com.cheyipai.ui.fragment.common.WebFragment;
 import com.cheyipai.ui.service.ServerService;
+import com.cheyipai.ui.utils.BitmapUtil;
 import com.cheyipai.ui.utils.DialogUtils;
 import com.cheyipai.ui.utils.IntentUtils;
+import com.cheyipai.ui.utils.ShareDataHelper;
 import com.cheyipai.ui.view.ScrollListView;
 import com.cheyipai.ui.view.SelectPicPopupWindow;
+import com.wang.avi.AVLoadingIndicatorView;
 import com.ypy.eventbus.EventBus;
 
 import java.io.File;
@@ -98,10 +102,24 @@ public class HairActivity extends AbsBaseActivity {
     private Dialog faceDialog;
     @BindView(R.id.hair_ll)
     protected RelativeLayout hair_ll;
+
+    @BindView(R.id.user_face)
+    ImageView userFace;
+
+    @BindView(R.id.take_photo_ll)
+    LinearLayout take_photo_ll;
+
+    @BindView(R.id.user_face_ll)
+    LinearLayout user_face_ll;
+
+    @BindView(R.id.avi)
+    AVLoadingIndicatorView avi;
+
     private int PICK_IMAGE_REQUEST = 1;
     private SelectPicPopupWindow picPopupWindow;
     public static WebFragment[] fragments;
     private int modelId;
+    private Hair mHair;
     private Oauth oauth;
     private F3dStatus f3dStatus;
     private D3OauthApi d3OauthApi;
@@ -123,6 +141,13 @@ public class HairActivity extends AbsBaseActivity {
         this.finish();
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initView();
+    }
+
     /**初始化fragment*/
     public void setfragment()
     {
@@ -138,26 +163,18 @@ public class HairActivity extends AbsBaseActivity {
 
     public void initAuthor(){
         try {
-            LoginUserBean.DataBean dataBean = CypGlobalBaseInfo.getLoginUserDataBean();
-            if(!TextUtils.isEmpty(dataBean.getAreaIDs())){
-                oauth= new Oauth();
-                oauth.setAccess_token(dataBean.getAreaIDs());
-                oauth.setToken_type(dataBean.getAreaNames());
-                oauth.setCode(dataBean.getBusinessId());
-                oauth.setPlayer(dataBean.getBusId());
+            oauth = (Oauth) ShareDataHelper.readObject(ShareDataHelper.HAIR,this,ShareDataHelper.OAUTH_obj);
+            d3OauthApi = new D3OauthApi(this);
+            if(oauth!=null){
+                Toast.makeText(HairActivity.this,"初始化成功！",Toast.LENGTH_LONG).show();
                 return;
             }
-            d3OauthApi = new D3OauthApi(this);
+
             d3OauthApi.getAuthor("gjt825", new OauthCallback() {
                 @Override
                 public void onOauthSucc(Oauth oauth) {
                     HairActivity.this.oauth = oauth;
-                    LoginUserBean.DataBean dataBean = new LoginUserBean.DataBean();
-                    dataBean.setAreaIDs(oauth.getAccess_token());
-                    dataBean.setAreaNames(oauth.getToken_type());
-                    dataBean.setBusinessId(oauth.getCode());
-                    dataBean.setBusId(oauth.getPlayer());
-                    CypGlobalBaseInfo.saveLoginInfo(HairActivity.this,dataBean);
+                    ShareDataHelper.saveObject(ShareDataHelper.HAIR,HairActivity.this,ShareDataHelper.OAUTH_obj,oauth);
                     Toast.makeText(HairActivity.this,"初始化成功！",Toast.LENGTH_LONG).show();
                 }
             });
@@ -169,7 +186,7 @@ public class HairActivity extends AbsBaseActivity {
 
     @OnClick(R.id.hair_mote_iv)
     public void onMoteClick(View view){
-        IntentUtils.aRouterIntent(this, Path.HAIR_SHOP);
+        //IntentUtils.aRouterIntent(this, Path.HAIR_SHOP);
         IntentUtils.aRouterIntent(HairActivity.this, Path.HAIR_3D);
        /* CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
         CustomTabsIntent customTabsIntent = builder.build();
@@ -206,16 +223,25 @@ public class HairActivity extends AbsBaseActivity {
         openEventBus();
        // initDialog();
         ButterKnife.bind(this);
+        modelId = getIntent().getExtras().getInt(Path.KEY_HAIR_ID);
+        mHair = (Hair) ShareDataHelper.readObject(ShareDataHelper.HAIR,HairActivity.this,ShareDataHelper.HAIR_ID+modelId);
         initView();
         initAuthor();
-        modelId = getIntent().getExtras().getInt(Path.KEY_HAIR_ID);
+        avi.hide();
         assetManager = this.getAssets();
         openAppStatitcs();
-        Intent intent2 = new Intent(HairActivity.this, ServerService.class);
-        startService(intent2);
+
        //TextViewh all_tv.setText(getRadiusGradientSpan("全部",0xFFec4ce6,0xfffa4a6f));
     }
+    public void hideClick(View view) {
+        avi.hide();
+        // or avi.smoothToHide();
+    }
 
+    public void showClick(View view) {
+        avi.show();
+        // or avi.smoothToShow();
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -239,6 +265,7 @@ public class HairActivity extends AbsBaseActivity {
                 });*/
                 String dirPath= Path.FBX_DIR+File.separator+modelId;
                 String webDirPath =Path.WEB_FBX_DIR+File.separator+modelId+File.separator;
+                avi.show();
                 d3OauthApi.uploadUserFace("gjtFace", HairActivity.this.oauth, file, new F3dUploadCallback() {
                     @Override
                     public void onUploadSucc(final F3dStatus f3dStatus) {
@@ -267,12 +294,15 @@ public class HairActivity extends AbsBaseActivity {
                                     public void onDown(DownObj downObj) {
                                         Toast.makeText(HairActivity.this," ply - down obj succ",Toast.LENGTH_LONG).show();
                                         //IntentUtils.aRouterIntent(HairActivity.this, Path.HAIR_3D);
-                                        Intent intent2 = new Intent(HairActivity.this, ServerService.class);
-                                        startService(intent2);
-                                        CheyipaiApplication.getInstance().getDefaultTabsManager()
-                                                .openUrl(HairActivity.this,
-                                                        new Website("http://localhost:8001/web/ply.jsp?p="+EncryptUtil.encryptData(webDirPath)),
-                                                        false,false,false,false,false);
+                                        String url = "http://localhost:8001/web/ply.jsp?p="+EncryptUtil.encryptData(webDirPath);
+                                        Hair hair = new Hair();
+                                        hair.setId(modelId);
+                                        hair.setFaceFile(file.getAbsolutePath());
+                                        hair.setModelPath(url);
+                                        ShareDataHelper.saveObject(ShareDataHelper.HAIR,HairActivity.this,ShareDataHelper.HAIR_ID+modelId,hair);
+                                        avi.hide();
+
+                                        openUrl(url);
                                     }
                                 },dirPath,"model.fbx");
                             }
@@ -287,13 +317,43 @@ public class HairActivity extends AbsBaseActivity {
         }
     }
 
+    private void openUrl(String url){
+        Intent intent2 = new Intent(HairActivity.this, ServerService.class);
+        startService(intent2);
+        CheyipaiApplication.getInstance().getDefaultTabsManager()
+                .openUrl(HairActivity.this,
+                        new Website(url),
+                        false,false,false,false,false);
+    }
 
     private void initView(){
         DialogUtils.setShapeDrawable(hair_ll);
+        if(mHair!=null){
+            take_photo_ll.setVisibility(View.GONE);
+            userFace.setVisibility(View.VISIBLE);
+            user_face_ll.setVisibility(View.VISIBLE);
+            try {
+                userFace.setImageBitmap(BitmapUtil.loadBitmap(mHair.getFaceFile(),true));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            user_face_ll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    openUrl(mHair.getModelPath());
+                }
+            });
+
+        }else{
+            user_face_ll.setVisibility(View.GONE);
+            take_photo_ll.setVisibility(View.VISIBLE);
+            userFace.setVisibility(View.GONE);
+        }
     }
     private void openAppStatitcs(){
 
     }
+
 
 
 
@@ -332,8 +392,8 @@ public class HairActivity extends AbsBaseActivity {
 
         fragmentManager.beginTransaction().replace(R.id.ll_tab,fragments[0]).commit();
         fragmentManager.executePendingTransactions();
-        if(!fragments[0].isLoad())
-        fragments[0].loadWebview(intro);
+      /*  if(!fragments[0].isLoad())
+        fragments[0].loadWebview(intro);*/
 
     }
     @OnClick(R.id.rb_tab_hair_service)
@@ -341,8 +401,8 @@ public class HairActivity extends AbsBaseActivity {
 
         fragmentManager.beginTransaction().replace(R.id.ll_tab,fragments[1]).commit();
         fragmentManager.executePendingTransactions();
-        if(!fragments[1].isLoad())
-        fragments[1].loadWebview(service);
+      /*  if(!fragments[1].isLoad())
+        fragments[1].loadWebview(service);*/
     }
 
     protected void openEventBus() {

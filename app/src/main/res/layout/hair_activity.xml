@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -9,7 +10,14 @@
         android:orientation="vertical"
         android:layout_height="match_parent">
     <include layout="@layout/hair_common_head" />
-
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/avi"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_8"
+            app:indicatorName="BallPulse"
+            android:layout_marginLeft="@dimen/dimen_15"
+            app:indicatorColor="#ffec4ce6"
+            />
     <ScrollView
         android:layout_width="match_parent"
         android:scrollbars="none"
@@ -21,6 +29,7 @@
             android:layout_height="match_parent">
             <LinearLayout
                 android:layout_width="wrap_content"
+                android:id="@+id/take_photo_ll"
                 android:layout_gravity="top|center_horizontal"
                 android:background="@mipmap/hair_top_shape"
                 android:gravity="center"
@@ -39,7 +48,35 @@
                     android:text="@string/take_photo_test"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginLeft="@dimen/dimen_15"
+                android:layout_marginRight="@dimen/dimen_15"
+                android:background="@color/lightGrey"
+                android:id="@+id/user_face_ll"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/user_face"
+                    android:layout_width="match_parent"
+                    android:scaleType="fitCenter"
+                    android:layout_height="@dimen/dimen_200" />
 
+            </LinearLayout>
+            <TextView
+                android:id="@+id/rb_tab_hair_intro"
+                android:padding="10dp"
+                android:drawablePadding="@dimen/dimen_10"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/dimen_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:textSize="18sp"
+                android:button="@null"
+                android:textColor="@color/common_text_red"
+                android:text="@string/recommond_hair" />
             <include layout="@layout/hair_detail_layout"></include>
             <include layout="@layout/hair_info_layout"></include>
             <LinearLayout
