@@ -1,10 +1,13 @@
 package com.cheyipai.ui;
 
 import android.app.Dialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Handler;
+import android.os.IBinder;
 import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -115,10 +118,12 @@ public class HomeActivity extends AbsBaseActivity {
         initView();
         ButterKnife.bind(this);
         openAppStatitcs();
-        Intent intent2 = new Intent(HomeActivity.this, ServerService.class);
-        startService(intent2);
+        Intent intent = new Intent(this, ServerService.class);
+        startService(intent);
        //TextViewh all_tv.setText(getRadiusGradientSpan("全部",0xFFec4ce6,0xfffa4a6f));
     }
+
+
 
     private void initView(){
         faceDataList = new ArrayList<String>();

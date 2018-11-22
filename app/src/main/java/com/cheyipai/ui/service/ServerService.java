@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.net.Uri;
+import android.os.Binder;
 import android.os.Environment;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
@@ -34,6 +35,7 @@ public class ServerService extends Service {
 
     AndServer andServer;
     Server server;
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -42,6 +44,7 @@ public class ServerService extends Service {
 
     public static String copyAssetsDir2Phone(String filePath) {
         String webPath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + filePath;
+        if( new File(webPath).exists() )return webPath;
         try {
             String[] fileList = CheyipaiApplication.getInstance().getAssets().list(filePath);
             if (fileList.length > 0) {//如果是目录
@@ -96,25 +99,39 @@ public class ServerService extends Service {
         }
         return filePath;
     }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                copyAssetsDir2Phone(Path.WEB_PATH);
+                Log.i("copyAssetsDir2Phone","copyAssetsDir2Phone -> onCreate, Thread: " + Thread.currentThread().getName());
+            }}).start();
+
+    }
+
+
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        new Thread(new Runnable() {
-              @Override
-              public void run() {
-                  //copyAssetsDir2Phone(Path.WEB_PATH);
+
+
+
                   File file = new File(Environment.getExternalStorageDirectory(), Path.WEB_PATH);
                   String websiteDirectory = file.getAbsolutePath();
                  // String path = getPath(websiteDirectory);
                   WebSite wesite = new XStorageWebsite(websiteDirectory);
-                  andServer = new AndServer.Build().website(wesite).listener(mListener).port(8001).timeout(10 * 1000).build();
+                  andServer = new AndServer.Build().website(wesite).listener(mListener).port(8001).timeout(20 * 1000).build();
                   server = andServer.createServer();
                   if(server!=null) {
                       if (!server.isRunning()) {
                           server.start();
                       }
                   }
-              }
-          }).start();
+
+
 
         return super.onStartCommand(intent, flags, startId);
     }

@@ -973,8 +973,26 @@ public class BitmapUtil {
 				m.postRotate(digree);
 				bm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(),
 						bm.getHeight(), m, true);
+				saveImage(bm,imgpath,90);
 			}
 			return bm;
+		}
+	}
+
+
+	public static void saveImage(Bitmap bitmap, String filePath, int quality) {
+		FileOutputStream fileOutputStream = null;
+		try {
+			fileOutputStream = new FileOutputStream(filePath);
+			bitmap.compress(Bitmap.CompressFormat.JPEG, quality, fileOutputStream);
+			fileOutputStream.flush();
+			fileOutputStream.close();
+			// 如果图片还没有回收，强制回收
+			if (!bitmap.isRecycled()) {
+				bitmap.recycle();
+				System.gc();
+			}
+		} catch (Exception e) {
 		}
 	}
 

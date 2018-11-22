@@ -10,15 +10,15 @@
         android:orientation="vertical"
         android:layout_height="match_parent">
     <include layout="@layout/hair_common_head" />
-        <com.wang.avi.AVLoadingIndicatorView
+       <!-- <com.wang.avi.AVLoadingIndicatorView
             android:id="@+id/avi"
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/dimen_16"
+            android:layout_height="@dimen/dimen_20"
             app:indicatorName="BallPulse"
             android:layout_marginLeft="@dimen/dimen_15"
             app:indicatorColor="#ffec4ce6"
-            />
+            />-->
     <ScrollView
         android:layout_width="match_parent"
         android:scrollbars="none"
@@ -49,21 +49,7 @@
                     android:text="@string/take_photo_test"
                     android:layout_height="wrap_content" />
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_marginLeft="@dimen/dimen_15"
-                android:layout_marginRight="@dimen/dimen_15"
-                android:id="@+id/user_face_ll"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/user_face"
-                    android:padding="@dimen/dimen_4"
-                    android:layout_width="match_parent"
-                    android:scaleType="fitCenter"
-                    android:layout_marginBottom="@dimen/dimen_8"
-                    android:layout_height="@dimen/dimen_180" />
-
-            </LinearLayout>
+            <include layout="@layout/hair_user_face_layout"></include>
             <TextView
                 android:id="@+id/rb_tab_hair_intro"
                 android:padding="10dp"

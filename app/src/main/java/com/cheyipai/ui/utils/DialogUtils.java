@@ -1,12 +1,20 @@
 package com.cheyipai.ui.utils;
 ;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cheyipai.ui.CheyipaiApplication;
+import com.cheyipai.ui.R;
 import com.cheyipai.ui.view.ShadowDrawable;
+import com.wang.avi.AVLoadingIndicatorView;
 
 
 /**
@@ -24,6 +32,7 @@ public class DialogUtils {
                                        final String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
+
 
     /**
      * @param context

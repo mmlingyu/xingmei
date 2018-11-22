@@ -1,0 +1,65 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/dimen_13"
+        android:layout_marginRight="@dimen/dimen_11"
+        android:orientation="vertical"
+        android:id="@+id/user_face_ll"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/user_face"
+            android:padding="@dimen/dimen_4"
+            android:layout_width="match_parent"
+            android:scaleType="fitCenter"
+            android:layout_marginBottom="@dimen/dimen_8"
+            android:layout_height="@dimen/dimen_180" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/dimen_4"
+            android:layout_marginBottom="@dimen/dimen_4"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/user_hair_face_tv"
+                android:layout_width="wrap_content"
+                android:drawableLeft="@mipmap/hair_face"
+                android:layout_marginLeft="@dimen/dimen_15"
+                android:drawablePadding="@dimen/dimen_6"
+                android:layout_marginBottom="@dimen/dimen_8"
+                android:layout_marginTop="@dimen/dimen_8"
+                android:layout_alignParentLeft="true"
+                android:text="@string/face_circle"
+                android:layout_marginRight="@dimen/dimen_15"
+                style="@style/CheYiPai.TextAppearance.Small.GRAY_999999"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/user_face_beauty_tv"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_10"
+                android:drawablePadding="@dimen/dimen_6"
+                android:layout_centerHorizontal="true"
+                android:drawableLeft="@mipmap/face_beauty"
+                android:layout_marginTop="@dimen/dimen_10"
+                android:text="98"
+                android:layout_marginRight="@dimen/dimen_15"
+                style="@style/CheYiPai.TextAppearance.Small.GRAY_999999"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/user_face_gender_tv"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_10"
+                android:drawablePadding="@dimen/dimen_6"
+                android:layout_alignParentRight="true"
+                android:drawableLeft="@mipmap/hair_girl_red"
+                android:layout_marginTop="@dimen/dimen_10"
+                android:text="@string/girl"
+                android:layout_marginRight="@dimen/dimen_15"
+                style="@style/CheYiPai.TextAppearance.Small.GRAY_999999"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+

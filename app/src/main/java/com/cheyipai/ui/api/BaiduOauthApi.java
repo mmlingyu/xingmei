@@ -53,7 +53,10 @@ import okio.Okio;
 public class BaiduOauthApi extends BaseApi {
     public static final MediaType urlencode = MediaType.parse("application/x-www-form-urlencoded;");
     private WeakReference<Context> weakcontext;
-
+    // 官网获取的 API Key 更新为你注册的
+    final String clientId = "0IVGjE6qyuCNAuczGRhI571H";
+    // 官网获取的 Secret Key 更新为你注册的
+    final String clientSecret = "vVVfdgSZ9oTFDFlfmUX7G9WC7TmGNMNW ";
     public BaiduOauthApi(Context context){
         this.weakcontext = new WeakReference<Context>(context);
     }
@@ -68,10 +71,7 @@ public class BaiduOauthApi extends BaseApi {
      * }
      */
     public  String getAuth(final OauthBack oauthBack) throws IOException {
-        // 官网获取的 API Key 更新为你注册的
-        final String clientId = "0IVGjE6qyuCNAuczGRhI571H";
-        // 官网获取的 Secret Key 更新为你注册的
-        final String clientSecret = "vVVfdgSZ9oTFDFlfmUX7G9WC7TmGNMNW ";
+
 
             new Thread() {
                 @Override

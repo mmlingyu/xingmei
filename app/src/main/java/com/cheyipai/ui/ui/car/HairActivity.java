@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cheyipai.corec.activity.AbsBaseActivity;
@@ -33,15 +34,19 @@ import com.cheyipai.ui.bean.F3d;
 import com.cheyipai.ui.bean.F3dCallback;
 import com.cheyipai.ui.bean.F3dStatus;
 import com.cheyipai.ui.bean.F3dUploadCallback;
+import com.cheyipai.ui.bean.FaceInfo;
 import com.cheyipai.ui.bean.Hair;
 import com.cheyipai.ui.bean.Oauth;
+import com.cheyipai.ui.bean.OauthBack;
 import com.cheyipai.ui.bean.OauthCallback;
 import com.cheyipai.ui.commons.EventCode;
 import com.cheyipai.ui.commons.Path;
 import com.cheyipai.ui.fragment.common.WebFragment;
+import com.cheyipai.ui.service.ServerService;
 import com.cheyipai.ui.utils.BitmapUtil;
 import com.cheyipai.ui.utils.DialogUtils;
 import com.cheyipai.ui.utils.IntentUtils;
+import com.cheyipai.ui.utils.LoaingHelper;
 import com.cheyipai.ui.utils.ShareDataHelper;
 import com.cheyipai.ui.view.SelectPicPopupWindow;
 import com.cheyipai.ui.vm.HairVM;
@@ -73,8 +78,17 @@ public class HairActivity extends AbsBaseActivity {
     @BindView(R.id.user_face_ll)
     LinearLayout user_face_ll;
 
-    @BindView(R.id.avi)
-    AVLoadingIndicatorView avi;
+    @BindView(R.id.user_hair_face_tv)
+    TextView user_hair_face_tv;
+
+    @BindView(R.id.user_face_beauty_tv)
+    TextView user_face_beauty_tv;
+
+    @BindView(R.id.user_face_gender_tv)
+    TextView user_face_gender_tv;
+
+/*    @BindView(R.id.avi)
+    AVLoadingIndicatorView avi;*/
 
     private int PICK_IMAGE_REQUEST = 1;
     private SelectPicPopupWindow picPopupWindow;
@@ -189,21 +203,13 @@ public class HairActivity extends AbsBaseActivity {
         mHair = (Hair) ShareDataHelper.readObject(ShareDataHelper.HAIR,HairActivity.this,ShareDataHelper.HAIR_ID+modelId);
         initView();
         initAuthor();
-        avi.hide();
         assetManager = this.getAssets();
         openAppStatitcs();
 
        //TextViewh all_tv.setText(getRadiusGradientSpan("全部",0xFFec4ce6,0xfffa4a6f));
     }
-    public void hideClick(View view) {
-        avi.hide();
-        // or avi.smoothToHide();
-    }
 
-    public void showClick(View view) {
-        avi.show();
-        // or avi.smoothToShow();
-    }
+    LoaingHelper loaingHelper = new LoaingHelper();
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -211,50 +217,41 @@ public class HairActivity extends AbsBaseActivity {
         if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri uri = data.getData();
             try {
+
                 File file =new File(getPathByUri4kitkat(HairActivity.this,uri));
-               /* baiduOauthApi.uploadUserFace(file, baidu_accessToken, new OauthBack() {
-                    @Override
-                    public void onOauthSucc(FaceInfo faceInfo) {
-                        Toast.makeText(D3FaceActivity.this,"BAIDU  succ ||"+faceInfo.getResult().getFace_list()[0].getFace_shape().getFace_shape(),Toast.LENGTH_LONG).show();
-                    }
 
-                    @Override
-                    public void onTokenSucc(String token) {
-
-                    }
-
-
-                });*/
                 String dirPath= Path.FBX_DIR+File.separator+modelId;
                 String webDirPath =Path.WEB_FBX_DIR+File.separator+modelId+File.separator;
-                avi.show();
+                loaingHelper.showDialogForLoading(HairActivity.this,"上传照片...");
                 d3OauthApi.uploadUserFace("gjtFace", HairActivity.this.oauth, file, new F3dUploadCallback() {
                     @Override
                     public void onUploadSucc(final F3dStatus f3dStatus) {
                         HairActivity.this.f3dStatus = f3dStatus;
                         Toast.makeText(HairActivity.this,"upload succ",Toast.LENGTH_LONG).show();
+                        loaingHelper.showDialogForLoading(HairActivity.this,"生成模型...");
                         d3OauthApi.getFace(HairActivity.this.oauth, f3dStatus, new F3dCallback() {
                             @Override
                             public void onF3dSucc(F3d f3d) {
 
-                                Toast.makeText(HairActivity.this," finish",Toast.LENGTH_LONG).show();
+                               // Toast.makeText(HairActivity.this," finish",Toast.LENGTH_LONG).show();
                              /*   d3OauthApi.get(HairActivity.this.oauth, f3d.getMesh(), new DownF3d() {
                                     @Override
                                     public void onDown(DownObj downObj) {
                                         Toast.makeText(HairActivity.this," ply - down ply succ",Toast.LENGTH_LONG).show();
                                     }
                                 }, Environment.getExternalStorageDirectory().getAbsolutePath()+"/git825"+ UUID.randomUUID().toString()+".zip");*/
+
                                 d3OauthApi.get(HairActivity.this.oauth, f3d.getTexture(), new DownF3d() {
                                     @Override
                                     public void onDown(DownObj downObj) {
                                         Toast.makeText(HairActivity.this," ply - down jpg succ",Toast.LENGTH_LONG).show();
                                     }
                                 }, dirPath,"model.jpg");
-
+                                loaingHelper.showDialogForLoading(HairActivity.this,"加载模型...");
                                 d3OauthApi.getObjOfBlendshapes(HairActivity.this.oauth, f3dStatus.getCode(), new DownF3d() {
                                     @Override
                                     public void onDown(DownObj downObj) {
-                                        Toast.makeText(HairActivity.this," ply - down obj succ",Toast.LENGTH_LONG).show();
+                                        loaingHelper.hideDailog();
                                         //IntentUtils.aRouterIntent(HairActivity.this, Path.HAIR_3D);
                                         String url = "http://localhost:8001/web/ply.jsp?p="+EncryptUtil.encryptData(webDirPath);
                                         Hair hair = new Hair();
@@ -262,8 +259,8 @@ public class HairActivity extends AbsBaseActivity {
                                         hair.setFaceFile(file.getAbsolutePath());
                                         hair.setModelPath(url);
                                         ShareDataHelper.saveObject(ShareDataHelper.HAIR,HairActivity.this,ShareDataHelper.HAIR_ID+modelId,hair);
-                                        avi.hide();
-
+                                        Intent intent = new Intent(HairActivity.this, ServerService.class);
+                                        startService(intent);
                                         openUrl(url);
                                     }
                                 },dirPath,"model.fbx");
@@ -297,6 +294,7 @@ public class HairActivity extends AbsBaseActivity {
             try {
                 DialogUtils.setShapeDrawable(user_face_ll);
                 if(TextUtils.isEmpty(mHair.getFace())){
+                    BitmapUtil.loadBitmap(mHair.getFaceFile(),true);
                     new HairVM(this).segmentFace(mHair.getFaceFile(),Path.USER_FACE_IMAGES,new BaseCallBack<String>(){
                         @Override
                         public void onCallBack(String s) {
@@ -305,8 +303,40 @@ public class HairActivity extends AbsBaseActivity {
                             ShareDataHelper.saveObject(ShareDataHelper.HAIR,HairActivity.this,ShareDataHelper.HAIR_ID+modelId,mHair);
                         }
                     });
+                    new HairVM(this).getFaceInfo(new File(mHair.getFaceFile()), new OauthBack() {
+                        @Override
+                        public void onOauthSucc(FaceInfo faceInfo) {
+                            FaceInfo.Resut resut = faceInfo.getResult();
+                                if(resut!=null){
+                                    FaceInfo.Face[] faces = resut.getFace_list();
+                                    if(faces!=null&&faces.length>0) {
+                                         HairActivity.this.runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                mHair.setSex("male".equals(faces[0].getGender().getType())?1:0);
+                                                mHair.setType(faces[0].getFace_shape().getType());
+                                                mHair.setBeauty(Double.valueOf(faces[0].getBeauty()).intValue());
+                                                user_hair_face_tv.setText(faces[0].getFace_shape().getType());
+                                                user_face_beauty_tv.setText(Double.valueOf(faces[0].getBeauty()).intValue()+"");
+                                                user_face_gender_tv.setText(faces[0].getGender().getType());
+                                            }
+                                        });
+
+
+                                    }
+                                }
+                        }
+
+                        @Override
+                        public void onTokenSucc(String token) {
+
+                        }
+                    });
                 }else {
-                    userFace.setImageBitmap(BitmapUtil.loadBitmap(mHair.getFace(), true));
+                    userFace.setImageBitmap(BitmapUtil.loadBitmap(mHair.getFace()));
+                    user_hair_face_tv.setText(mHair.getType());
+                    user_face_beauty_tv.setText(mHair.getBeauty()+"");
+                    user_face_gender_tv.setText(mHair.getSex()+"");
                 }
 
             } catch (Exception e) {

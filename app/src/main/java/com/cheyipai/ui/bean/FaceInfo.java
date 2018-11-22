@@ -82,10 +82,19 @@ public class FaceInfo {
         private double face_probability;
         private Angle angle;
         private FaceShape face_shape;
-        private String gender;
+        private Gender gender;
         private Point[] landmark;
-        private Point[] landmark72;
+       // private Point[] landmark72;
         private double beauty;
+        private double age;
+
+        public double getAge() {
+            return age;
+        }
+
+        public void setAge(double age) {
+            this.age = age;
+        }
 
         public String getFace_token() {
             return face_token;
@@ -111,6 +120,14 @@ public class FaceInfo {
             this.face_probability = face_probability;
         }
 
+        public Gender getGender() {
+            return gender;
+        }
+
+        public void setGender(Gender gender) {
+            this.gender = gender;
+        }
+
         public Angle getAngle() {
             return angle;
         }
@@ -127,14 +144,6 @@ public class FaceInfo {
             this.face_shape = face_shape;
         }
 
-        public String getGender() {
-            return gender;
-        }
-
-        public void setGender(String gender) {
-            this.gender = gender;
-        }
-
         public Point[] getLandmark() {
             return landmark;
         }
@@ -143,13 +152,13 @@ public class FaceInfo {
             this.landmark = landmark;
         }
 
-        public Point[] getLandmark72() {
+      /*  public Point[] getLandmark72() {
             return landmark72;
         }
 
         public void setLandmark72(Point[] landmark72) {
             this.landmark72 = landmark72;
-        }
+        }*/
 
         public double getBeauty() {
             return beauty;
@@ -180,15 +189,15 @@ public class FaceInfo {
         }
     }
     public class FaceShape{
-        private String face_shape;
+        private String type;
         private double probability;
 
-        public String getFace_shape() {
-            return face_shape;
+        public String getType() {
+            return type;
         }
 
-        public void setFace_shape(String face_shape) {
-            this.face_shape = face_shape;
+        public void setType(String type) {
+            this.type = type;
         }
 
         public double getProbability() {
